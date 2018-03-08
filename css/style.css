@@ -1,0 +1,68 @@
+/*!
+ * Start Bootstrap - Half Slider (https://startbootstrap.com/template-overviews/half-slider)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-half-slider/blob/master/LICENSE)
+ */
+
+header {
+  margin:0;
+  padding:0;
+  height: 500px;
+  width: auto;
+  background: url(../img/header-bg.jpg) no-repeat center fixed; 
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+}
+
+
+
+h1 {
+font-size: 3.5rem;
+color: white;
+text-align: center;
+position: relative;
+top: 38%;
+font-family: 'Pacifico', cursive;
+}
+
+h2 {
+	font-family: 'Dosis', sans-serif;
+	margin-bottom: 50px;
+}
+
+.bg-dark {
+	opacity: 0.6;
+}
+
+.content {
+	padding-top: 3rem !important;
+	padding-bottom: 3rem !important;
+	height: 500px;
+	background-image: url('../img/flocon.png');
+}
+
+
+.article {
+	height: auto;
+	width: 65%;
+	margin: 0 auto;
+	background-color: white;
+	border: 2px solid black;
+	margin-bottom: 100px;
+}
+ 
+.title_article {
+
+	height: 40px;
+	width: auto;
+	background-color: #E1F4F9;
+	border-bottom: 2px solid black;
+	padding: 5px 15px;
+}
+
+.texte_article {
+	padding: 10px 15px;
+	height: auto;
+	width: auto;
+	background-color: white;
+}

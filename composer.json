@@ -1,0 +1,17 @@
+{
+    "name": "thomas/test",
+    "config": {
+        "platform": {
+            "php": "7.0.10"
+        }
+    },
+    "authors": [
+        {
+            "name": "miten",
+            "email": "miten93@msn.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^2.0"
+    }
+}
