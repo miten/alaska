@@ -1,0 +1,38 @@
+{% extends "home.twig" %}
+
+{% block content %}
+    <!-- Page Content -->
+    <section class="content">
+        <div class="container">
+            <h2>Voici mon histoire ...</h2>
+
+            {% for article in article %}
+
+                <div class="article">
+                    <a href="http://localhost/blog/?page=article&id={{ article.id }}">
+                        <div class="title_article">
+                            <h3>{{ article.titre }}</h3>
+                        </div>
+                    </a>
+                    <div class="texte_article">
+                        <p>{{ article.texte }}<p>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+
+            {% for commentaire in commentaires %}
+
+                {{ commentaire.auteur }}
+
+            {% endfor %}
+
+
+
+
+        </div>
+    </section>
+
+{% endblock %}

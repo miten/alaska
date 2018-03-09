@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="web/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -32,12 +32,12 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="http://localhost/blog/?page=home">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Qui suis-je ?</a>
+                    <a class="nav-link" href="http://localhost/blog/?page=myself">Qui suis-je ?</a>
                 </li>
             </ul>
         </div>
@@ -48,33 +48,21 @@
     <h1>Billet simple<br>pour l'Alaska</h1>
 </header>
 
-<!-- Page Content -->
-<section class="content">
-    <div class="container">
-        <h2>Voici mon histoire ...</h2>
 
-        {% for article in articles %}
+{% block content %}
 
-            <div class="article">
-                <div class="title_article">
-                    <h3>{{ article.titre }}</h3>
-                </div>
-                <div class="texte_article">
-                    <p>{{ article.texte }}<p>
-                </div>
-            </div>
 
-        {% endfor %}
 
-    </div>
-</section>
+
+{% endblock %}
+
+
 
 <!-- Footer -->
-<footer class="">
+<footer>
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Jean Forteroche 2018</p>
+        <p class="copyright">Copyright &copy; Jean Forteroche 2018</p>
     </div>
-
 </footer>
 
 
