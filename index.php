@@ -24,6 +24,12 @@ if (isset($_GET['page'])) {
             break;
 
 
+        case 'addArticle':
+
+            addArticle();
+            break;
+
+
 
 
         case 'delete':

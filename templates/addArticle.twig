@@ -1,0 +1,11 @@
+{% extends "home.twig" %}
+
+{% block content %}
+
+    <form action="http://localhost/blog/?page=addArticle" method=POST>
+        Titre:<br><input type="text" name="titre"><br>
+        texte:<br><input type="text" name="texte"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}

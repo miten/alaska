@@ -6,6 +6,7 @@
         <div class="container">
             <h2>Voici mon histoire ...</h2>
 
+
             {% for article in article %}
 
                 <div class="article">
@@ -19,6 +20,7 @@
                     </div>
                 </div>
 
+
             {% endfor %}
 
 
@@ -26,6 +28,8 @@
             {% for commentaire in commentaires %}
 
                 {{ commentaire.auteur }}
+
+                {{ commentaire.texte }}
 
             {% endfor %}
 
