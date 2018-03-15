@@ -25,8 +25,8 @@ function getArticle($id) {
 function deleteArticle($id) {
 
     $db = new Database();
-    $data = $db->query('SELECT * FROM articles WHERE id='.$id.'');
-    return $data;
+    $sql = 'DELETE FROM articles WHERE id='.$id.'';
+    $db->getPDO()->exec($sql);
 
 }
 

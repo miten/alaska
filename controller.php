@@ -2,15 +2,17 @@
 
 require 'vendor/autoload.php';
 require 'model.php';
-require 'entity/Article.php';
 
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
-$twig = new Twig_Environment($loader, ['cache' => false]);
+$twig= new Twig_Environment($loader, ['cache' => false]);
 
 
 
 function home(){
     global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
+    }
     $articles = getArticles();
 
     echo $twig->render('articles.twig', array('articles' => $articles));
@@ -18,10 +20,14 @@ function home(){
 
 
 function article(){
+    global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
+    }
+
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
 
-        global $twig;
         $article = getArticle($id);
         $commmentaires = getCommentaires($id);
 
@@ -30,8 +36,13 @@ function article(){
     }
 }
 
+
+
 function addArticle() {
     global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
+    }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     addArticlee($_POST['titre'], $_POST['texte']);
@@ -42,8 +53,56 @@ function addArticle() {
 }
 
 
-
 function myself(){
     global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
+    }
+
     echo $twig->render('aboutme.twig');
+}
+
+
+function delete(){
+
+    global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
+    }
+
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        deleteArticle($id);
+        home();
+
+    }
+}
+
+
+function admin_connect() {
+    global $twig;
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_POST['username'] == 'miten' && $_POST['password'] == 'miten') {
+            $_SESSION['statut'] = true;
+            $twig->addGlobal("session", $_SESSION);
+            home();
+            die();
+        }
+        else {
+            echo $twig->render('admin_connect.twig', array('message' => 'MAUVAIS CODE FRERO'));
+            die();
+        }
+    }
+
+    echo $twig->render('admin_connect.twig');
+
+}
+
+
+function admin_disconnect() {
+
+    session_unset();
+    home();
+
 }

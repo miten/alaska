@@ -4,25 +4,21 @@
     <!-- Page Content -->
     <section class="content">
         <div class="container">
-            <h2>Voici mon histoire ...</h2>
 
+            <div class="article">
 
             {% for article in article %}
 
-                <div class="article">
-                    <a href="http://localhost/blog/?page=article&id={{ article.id }}">
-                        <div class="title_article">
-                            <h3>{{ article.titre }}</h3>
-                        </div>
-                    </a>
-                    <div class="texte_article">
-                        <p>{{ article.texte }}<p>
-                    </div>
+                <div class="titre_article">
+                    <h2>{{ article.titre }}</h2>
                 </div>
-
+                <div class="texte_article">
+                    <p>{{ article.texte }}<p>
+                </div>
 
             {% endfor %}
 
+            </div>
 
 
             {% for commentaire in commentaires %}

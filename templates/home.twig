@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -16,6 +14,7 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="web/css/style.css" rel="stylesheet">
 
@@ -39,6 +38,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost/blog/?page=myself">Qui suis-je ?</a>
                 </li>
+                <li class="nav-item">
+
+                    {% if session.statut == false %} <a class="nav-link" href="http://localhost/blog/?page=admin_connect"><img src="web/img/lock.svg" width="30" height="30"></a>{% endif %}
+                    {% if session.statut == true %}<a class="nav-link" href="http://localhost/blog/?page=admin_disconnect"><img src="web/img/exit.svg" width="30" height="30"></a>{% endif %}
+                </li>
+
             </ul>
         </div>
     </div>

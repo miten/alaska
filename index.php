@@ -1,12 +1,14 @@
 <?php
 
 require 'controller.php';
-
+require 'vendor/autoload.php';
 
 
 if (isset($_GET['page'])) {
 
     $page = $_GET['page'];
+
+    session_start();
 
     switch ($page) {
         case 'home':
@@ -31,14 +33,23 @@ if (isset($_GET['page'])) {
 
 
 
+        case 'admin_connect':
+
+            admin_connect();
+            break;
+
+
+
+        case 'admin_disconnect':
+
+            admin_disconnect();
+            break;
+
+
+
 
         case 'delete':
-
-            if (isset($_GET['id']) && ($admin === 1 )) {
-                $id = $_GET['id'];
-                deleteArticle($id);
-
-            }
+            delete();
             break;
 
 

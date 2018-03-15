@@ -36,8 +36,22 @@ h2 {
 	margin-bottom: 50px;
 }
 
+h3 {
+
+	font-weight: 800;
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	color: #1d2124;
+}
+
+
+.navbar {
+    height:50px;
+}
+
+
+
 .bg-dark {
-	opacity: 0.6;
+    opacity: 0.9;
 }
 
 .content {
@@ -47,18 +61,58 @@ h2 {
 }
 
 
-.article {
-	height: auto;
+/* Liste des articles */
+
+
+
+.articles {
+	height: 250px;
 	width: 65%;
 	margin: 0 auto;
 	background-color: white;
-	border: 2px solid black;
 	margin-bottom: 100px;
 }
  
+.title_articles {
+
+	height: 74px;
+	width: auto;
+	background-color: #E1F4F9;
+	border-bottom: 2px solid black;
+	padding: 5px 15px;
+}
+
+.texte_articles {
+	padding: 50px 15px;
+	height: auto;
+	width: auto;
+	background-color: white;
+
+}
+
+.texte_articles p {
+
+	font-family: 'Varela Round', sans-serif;
+}
+
+.delete_btn {
+
+    float: right;
+}
+
+
+
+/* Article simple */
+
+.article {
+    margin: 0 auto;
+    width: 70%;
+
+}
+
 .title_article {
 
-	height: 40px;
+	height: auto;
 	width: auto;
 	background-color: #E1F4F9;
 	border-bottom: 2px solid black;
@@ -66,13 +120,43 @@ h2 {
 }
 
 .texte_article {
-	padding: 10px 15px;
+	padding: 50px 15px;
 	height: auto;
 	width: auto;
 	background-color: white;
+
 }
+
+.texte_article p {
+
+	font-family: 'Varela Round', sans-serif;
+}
+
+
+
+
+
+
+/* Page biographie */
+
+
+.biographie {
+	margin: 0 auto;
+	width: 70%;
+}
+
+.autor-img {
+
+	float: right;
+
+}
+
+
+
+/* footer */
+
 
 .copyright {
 	color: black;
-    text-align: center;
+	text-align: center;
 }

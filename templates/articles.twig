@@ -8,13 +8,18 @@
 
         {% for article in articles %}
 
-            <div class="article">
+            <div class="articles">
                 <a href="http://localhost/blog/?page=article&id={{ article.id }}">
-                    <div class="title_article">
-                        <h3>{{ article.titre }}</h3>
+                    <div class="title_articles">
+                        <div class="texte">
+                            <h3>{{ article.titre }}</h3>
+                        </div>
+                        <div class="delete">
+                            {% if session.statut == true %} <a href="http://localhost/blog/?page=delete&id={{ article.id }}"><img class="delete_btn" src="web/img/delete.svg" width="25" height="25"></a>{% endif %}
+                        </div>
                     </div>
                 </a>
-                <div class="texte_article">
+                <div class="texte_articles">
                     <p>{{ article.texte }}<p>
                 </div>
             </div>
