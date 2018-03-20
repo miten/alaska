@@ -9,18 +9,16 @@
         {% for article in articles %}
 
             <div class="articles">
-                <a href="http://localhost/blog/?page=article&id={{ article.id }}">
-                    <div class="title_articles">
-                        <div class="texte">
-                            <h3>{{ article.titre }}</h3>
-                        </div>
-                        <div class="delete">
-                            {% if session.statut == true %} <a href="http://localhost/blog/?page=delete&id={{ article.id }}"><img class="delete_btn" src="web/img/delete.svg" width="25" height="25"></a>{% endif %}
-                        </div>
+                <div class="header_articles">
+                    <div class="title_header">
+                        <a href="http://localhost/blog/?page=article&id={{ article.id }}"><h3>{{ article.titre }}</h3></a>
                     </div>
-                </a>
-                <div class="texte_articles">
-                    <p>{{ article.texte }}<p>
+                </div>
+                <div class="body_articles">
+                    <p>{{ article.texte|slice(0, 500) }} ... <p>
+                </div>
+                <div class="footer_articles">
+                    <p>Publié le {{ article.date|date("d/m/Y") }}</p>
                 </div>
             </div>
 

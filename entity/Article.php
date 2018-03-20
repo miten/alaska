@@ -19,12 +19,6 @@ class Article {
      */
 
 
-    public function __construct($titre, $texte)
-    {
-        $this->setTitre($titre);
-        $this->setTexte($texte);
-    }
-
 
     public function hydrate(array $rows) {
         $this->setId($rows['titre']);
@@ -79,21 +73,6 @@ class Article {
     {
         $this->texte = $texte;
     }
-
-
-
-
-
-
-    public function getExtrait() {
-
-        $texte = '<p>' .substr($this->getTexte(),0,5). '...</p>';
-
-        return $texte;
-    }
-
-
-
 
 
 

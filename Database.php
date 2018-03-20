@@ -35,7 +35,17 @@ class Database {
     public function query($statement) {
 
         $req = $this->getPDO()->query($statement);
-        $data = $req->fetchAll(PDO::FETCH_CLASSTYPE);
+        $data = $req->fetchAll(PDO::FETCH_CLASS);
+        return $data;
+
+    }
+
+
+    public function queryOne($statement, $class) {
+
+        $req = $this->getPDO()->query($statement);
+        $data = $req->fetchAll(PDO::FETCH_CLASS, $class);
+
         return $data;
 
     }

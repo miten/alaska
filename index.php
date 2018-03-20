@@ -26,9 +26,15 @@ if (isset($_GET['page'])) {
             break;
 
 
-        case 'addArticle':
+        case 'post_article':
 
-            addArticle();
+            post_article();
+            break;
+
+
+        case 'post_comment':
+
+            post_comment();
             break;
 
 
@@ -51,6 +57,12 @@ if (isset($_GET['page'])) {
         case 'delete':
             delete();
             break;
+
+
+        case 'test':
+            test();
+            break;
+
 
 
 

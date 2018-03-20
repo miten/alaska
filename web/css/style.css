@@ -39,13 +39,22 @@ h2 {
 h3 {
 
 	font-weight: 800;
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: 'Dosis', sans-serif;
 	color: #1d2124;
 }
 
 
 .navbar {
     height:50px;
+}
+
+.navbar-nav {
+
+    width:23%;
+}
+
+.nav-item {
+    margin-right: 1%;
 }
 
 
@@ -66,45 +75,84 @@ h3 {
 
 
 .articles {
-	height: 250px;
+	height: auto;
 	width: 65%;
 	margin: 0 auto;
 	background-color: white;
-	margin-bottom: 100px;
+    margin-bottom: 10%;
 }
  
-.title_articles {
+.header_articles {
 
 	height: 74px;
 	width: auto;
-	background-color: #E1F4F9;
+	background-color: #F3F3F3;
 	border-bottom: 2px solid black;
 	padding: 5px 15px;
 }
 
-.texte_articles {
-	padding: 50px 15px;
-	height: auto;
-	width: auto;
-	background-color: white;
-
+.title_header {
+    width: 80%;
 }
 
-.texte_articles p {
-
-	font-family: 'Varela Round', sans-serif;
+.header_articles > div {
+    display: inline-block;
 }
 
-.delete_btn {
+.delete_header {
+
+    float: right;
+}
+
+.modify_btn {
+    padding-right: 5px;
+    margin-right: 5px;
+    border-right: 2px solid black;;
+}
+
+
+.delete_btn  {
 
     float: right;
 }
 
 
 
+.body_articles {
+	padding: 35px 15px;
+	height: auto;
+	width: auto;
+	background-color: white;
+
+}
+
+.body_articles p {
+
+	font-family: 'Varela Round', sans-serif;
+}
+
+
+
+.footer_articles {
+
+    height: 20px;
+
+}
+
+
+.footer_articles > p {
+    float: right;
+    color: #4e555b;
+    font-size: 12px;
+
+}
+
+
 /* Article simple */
 
 .article {
+
+    height: auto;
     margin: 0 auto;
     width: 70%;
 
@@ -112,11 +160,12 @@ h3 {
 
 .title_article {
 
-	height: auto;
-	width: auto;
-	background-color: #E1F4F9;
-	border-bottom: 2px solid black;
-	padding: 5px 15px;
+
+    height: 74px;
+    width: auto;
+    background-color: #F3F3F3;
+    border-bottom: 2px solid black;
+    padding: 5px 15px;
 }
 
 .texte_article {
@@ -132,10 +181,73 @@ h3 {
 	font-family: 'Varela Round', sans-serif;
 }
 
+.commentaires {
+
+    margin: 0 auto;
+    width: 70%;
+}
+
+.texte_commentaire {
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+.auteur_commentaire > h4 {
+
+    font-size: 2em;
+    color: #373aa0;
+    font-weight: bold;
+
+}
+
+.texte_commentaire {
 
 
 
+}
 
+.texte_commentaire > p {
+
+    font-family: 'Varela Round', sans-serif;
+
+}
+
+
+.wiziwig {
+    margin: 0 auto;
+    width: 70%;
+}
+
+
+/* Page login  */
+
+.admin_form {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 6%;
+    margin-bottom: 6%;
+    margin-left: 35%;
+}
+
+
+.btn-primary {
+
+    background-color: #dae1e8;
+    border-color: transparent;
+}
+
+
+#error_message p{
+    color: #dd6666;
+}
+
+
+.ahah {
+    height:20px;
+    background-color: grey;
+}
 
 /* Page biographie */
 

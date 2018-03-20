@@ -17,69 +17,117 @@ class Commentaire
 
     private $auteur;
 
-    private $articleId;
-
     private $texte;
 
+    private $date;
+
+    private $id_article;
+
+    /**
+     * Commentaire constructor.
+     * @param $id
+     * @param $auteur
+     * @param $texte
+     * @param $date
+     * @param $id_article
+     */
 
 
-    public function __construct($auteur, $texte, $articleId) {
+
+    public function __construct($id, $auteur, $texte, $date, $id_article)
+    {
+        $this->id = $id;
         $this->auteur = $auteur;
         $this->texte = $texte;
-        $this->articleId = $articleId;
+        $this->date = $date;
+        $this->id_article = $id_article;
     }
 
 
-
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
-
-
-    public function setAuteur($auteur)
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
     {
-        $this->auteur = $auteur;
-
-        return $this;
+        $this->id = $id;
     }
 
-
-
-    public function setTexte($texte)
-    {
-        $this->texte = $texte;
-
-        return $this;
-    }
-
-
-    public function setAuteurId($auteurId)
-    {
-        $this->auteurId = $auteurId;
-
-        return $this;
-    }
-
-
-
+    /**
+     * @return mixed
+     */
     public function getAuteur()
     {
         return $this->auteur;
     }
 
+    /**
+     * @param mixed $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
 
+    /**
+     * @return mixed
+     */
     public function getTexte()
     {
         return $this->texte;
     }
 
-
-    public function getArticleId()
+    /**
+     * @param mixed $texte
+     */
+    public function setTexte($texte)
     {
-        return $this->articleId;
+        $this->texte = $texte;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdArticle()
+    {
+        return $this->id_article;
+    }
+
+    /**
+     * @param mixed $id_article
+     */
+    public function setIdArticle($id_article)
+    {
+        $this->id_article = $id_article;
+    }
+
+
+
+
+
 
 
 }

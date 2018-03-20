@@ -14,11 +14,14 @@ function getArticles() {
 }
 
 
+
+
 function getArticle($id) {
     $db = new Database();
-    $data = $db->query('SELECT * FROM articles WHERE id='.$id.'');
+    $data = $db->queryOne('SELECT * FROM articles WHERE id='.$id.'', Article::class);
     return $data;
 }
+
 
 
 
@@ -34,22 +37,36 @@ function deleteArticle($id) {
 
 
 
-function getCommentaires($id) {
+function getCommentaires($id_article) {
     $db = new Database();
-    $commentaires = $db->query('SELECT * FROM commentaires WHERE id='.$id.'');
+    $commentaires = $db->query('SELECT * FROM commentaires WHERE id_article='.$id_article.'');
     return $commentaires;
 
 
 }
 
 
-function addArticlee($titre, $texte) {
+
+
+function addArticle($titre, $texte) {
 
     $db = new Database();
     $sql = "INSERT INTO articles (titre, texte) VALUES ('$titre', '$texte')";
 
     $db->getPDO()->exec($sql);
 
+
+}
+
+
+
+function addComment($auteur, $texte, $id_article) {
+
+    $db = new Database();
+    $date = new DateTime();
+    $date = $date->format('Y-m-d H:i:s');
+    $sql = "INSERT INTO commentaires (auteur, texte, date, id_article) VALUES ('$auteur', '$texte', '$date', '$id_article')";
+    $db->getPDO()->exec($sql);
 
 
 }
