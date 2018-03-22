@@ -1,7 +1,5 @@
 <?php
 
-require 'Database.php';
-
 
 /**
  * Created by PhpStorm.
@@ -34,14 +32,30 @@ class Commentaire
 
 
 
-    public function __construct($id, $auteur, $texte, $date, $id_article)
+    public function __construct(array $rows)
     {
-        $this->id = $id;
-        $this->auteur = $auteur;
-        $this->texte = $texte;
-        $this->date = $date;
-        $this->id_article = $id_article;
+        if (isset($rows['id'])) {
+            $this->id = ($rows['id']);
+        }
+
+        $this->auteur = ($rows['auteur']);
+        $this->texte = ($rows['texte']);
+        $this->setDate();
+        $this->id_article = ($rows['id_article']);
     }
+
+
+    public function hydrate(array $rows) {
+
+        $this->setId($rows['id']);
+        $this->setAuteur($rows['auteur']);
+        $this->settexte($rows['texte']);
+        $this->setdate();
+        $this->setIdArticle($rows['id_article']);
+    }
+
+
+
 
 
     /**
@@ -101,10 +115,13 @@ class Commentaire
     }
 
     /**
-     * @param mixed $date
+     * @param DateTime $date
      */
-    public function setDate($date)
+    public function setDate()
     {
+
+        $date = new DateTime();
+        $date->format('Y-m-d H:i:s');
         $this->date = $date;
     }
 

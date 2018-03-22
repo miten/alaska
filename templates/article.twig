@@ -5,9 +5,6 @@
     <section class="content">
         <div class="container">
 
-
-
-
             <div class="article">
                 <div class="header_articles">
                     <div class="title_header">
@@ -15,13 +12,13 @@
                     </div>
                     {% if session.statut == true %}
                     <div class="delete_header">
-                        <a href="http://localhost/blog/?page=delete&id={{ article.id }}"><img class="delete_btn" title="supprimer" alt="supprimer" src="web/img/delete.svg" width="27em" height="auto"></a>
-                        <a href="http://localhost/blog/?page=modify&id={{ article.id }}"><img class="modify_btn" title="editer" alt="editer" src="web/img/modify.svg" width="30em" height="auto"></a>
+                        <a href="http://localhost/blog/?page=delete_article&id={{ article.id }}"><img class="delete_btn" title="supprimer" alt="supprimer" src="web/img/delete.svg" width="27em" height="auto"></a>
+                        <a href="http://localhost/blog/?page=modify_article&id={{ article.id }}"><img class="modify_btn" title="editer" alt="editer" src="web/img/modify.svg" width="30em" height="auto"></a>
                     </div>
                     {% endif %}
                 </div>
                 <div class="body_articles">
-                    <p>{{ article.texte }} ... <p>
+                    <p>{{ article.texte| convert_encoding('UTF-8', 'ISO-8859-1') }} <p>
                 </div>
                 <div class="footer_articles">
                     <p>Publié le {{ article.date|date("d/m/Y") }}</p>
@@ -29,59 +26,60 @@
             </div>
 
 
+
+            <div class="comment_form">
+
+                <form action="http://localhost/blog/?page=post_comment" method=POST>
+                    Titre:<input name="commentaire[0][auteur]"/>
+                    texte:<input name="commentaire[0][texte]"/>
+                    <input style="visibility: hidden;" value="{{ article.id }}" name="commentaire[0][id_article]">
+                    <input type="submit" value="Submit">
+                </form>
+
+            </div>
+
+
+
             <div class="commentaires">
 
 
                 {% for commentaire in commentaires %}
 
-                    <div class="commentaire">
-                        <div class="auteur_commentaire">
-                            <h4>{{ commentaire.auteur }} </h4>
+                    <div class="commentaire" id="commentaire_{{ commentaire.id }}">
+                        <div class="header_commentaire">
+                            <div class="auteur_commentaire">
+                                <h4>{{ commentaire.auteur }} </h4>
+                                <p>Publié le {{ commentaire.date|date("d/m/Y") }}</p>
+                            </div>
+                            {% if session.statut == true %}
+                                <div class="delete_header">
+                                    <a href="http://localhost/blog/?page=delete_comment&id={{ commentaire.id }}" ><img onclick="myFunction({{ commentaire.id }})" class="delete_btn" title="supprimer" alt="supprimer" src="web/img/delete.svg" width="27em" height="auto"></a>
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="texte_commentaire">
                             <p>{{ commentaire.texte }}</p>
                         </div>
                     </div>
+
                 {% endfor %}
 
             </div>
 
-            <div class="wiziwig">
-
-            <form action="http://localhost/blog/?page=post_comment" method=POST>
-                Titre:<br><input type="text" name="auteur"><br>
-                texte:<br><input type="text" name="texte"><br>
-                <input style="visibility: hidden;" value="{{ article.id }}" name="id_article">
-                <input type="submit" value="Submit">
-            </form>
-
-            </div>
-
-
-
-
-
         </div>
+
     </section>
 
 {% endblock %}
 
 
 
-
 {% block script %}
 
 
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=218h2ppq5qps0std3k5qz1z6p9lnpisfzwt2z9b2z0kum0ri"></script>
-
 <script>
-    tinymce.init({
-        width: "70%",
-        height: "50px",
 
-        selector: "textarea",
-        plugins: "a11ychecker, advcode, linkchecker, media mediaembed, powerpaste, tinymcespellchecker",
-        toolbar: "a11ycheck, code"
-    });
+
 </script>
+
 {% endblock %}

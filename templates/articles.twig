@@ -11,11 +11,11 @@
             <div class="articles">
                 <div class="header_articles">
                     <div class="title_header">
-                        <a href="http://localhost/blog/?page=article&id={{ article.id }}"><h3>{{ article.titre }}</h3></a>
+                        <a href="http://localhost/blog/?page=article&id={{ article.id }}"><h3>{{ article.titre | convert_encoding('UTF-8', 'ISO-8859-1') }}</h3></a>
                     </div>
                 </div>
                 <div class="body_articles">
-                    <p>{{ article.texte|slice(0, 500) }} ... <p>
+                    <p>{{ article.texte|slice(0, 500)| convert_encoding('UTF-8', 'ISO-8859-1') }} ... <p>
                 </div>
                 <div class="footer_articles">
                     <p>Publié le {{ article.date|date("d/m/Y") }}</p>

@@ -1,8 +1,10 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'model.php';
 require 'entity/Article.php';
+require 'database/ArticleManager.php';
+require 'database/CommentaireManager.php';
+
 
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
 $twig= new Twig_Environment($loader, ['cache' => false]);
@@ -14,7 +16,9 @@ function home(){
     if (isset($_SESSION)) {
         $twig->addGlobal("session", $_SESSION);
     }
-    $articles = getArticles();
+    $manager = new ArticleManager();
+    $articles = $manager->getArticles();
+
 
     echo $twig->render('articles.twig', array('articles' => $articles));
 }
@@ -31,22 +35,23 @@ function article($id = null){
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $idd = $_GET['id'];
-    }
 
+    }
 
     if (isset($id)||isset($idd)) {
         $id = $id ?: $idd;
-        $article = getArticle($id);
-        $article = array_values($article)[0];
-        $commmentaires = getCommentaires($article->getId());
+    }
 
+        $manager = new ArticleManager();
+        $article = $manager->getArticle($id);
+
+
+        $manage = new CommentaireManager();
+        $commmentaires = $manage->getCommentaires($id);
 
         echo $twig->render('article.twig', array('article' => $article,'commentaires' => $commmentaires));
 
-    }
-    else {
-        echo "Article non trouvé";
-    }
+
 
 }
 
@@ -58,11 +63,17 @@ function post_article() {
         $twig->addGlobal("session", $_SESSION);
     }
 
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    addArticle($_POST['titre'], $_POST['texte']);
+
+        $manager = new ArticleManager();
+        $article = new Article($_POST['article'][0]);
+        $manager->addArticle($article);
+        home();
     }
 
     echo $twig->render('AddArticle.twig');
+
 
 }
 
@@ -77,15 +88,14 @@ function post_comment() {
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        addComment($_POST['auteur'], $_POST['texte'], $_POST['id_article']);
-        article($_POST['id_article']);
+        $manager = new CommentaireManager();
+        $commentaire = new Commentaire($_POST['commentaire'][0]);
+        $manager->addCommentaire($commentaire);
+        article($commentaire->getIdArticle());
+
     }
 
 }
-
-
-
-
 
 
 
@@ -100,20 +110,48 @@ function myself(){
 
 
 
-
-
-function delete(){
+function delete_comment(){
 
     global $twig;
     if (isset($_SESSION)) {
         $twig->addGlobal("session", $_SESSION);
     }
 
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        deleteArticle($id);
-        home();
 
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $manager = new CommentaireManager();
+            $commentaire = $manager->getCommentaire($id);
+            $id_article = $commentaire->getIdArticle();
+            $manager->deleteCommentaire($commentaire);
+            article($id_article);
+        }
+
+    }
+
+}
+
+
+
+
+function delete_article(){
+
+    global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $manager = new ArticleManager();
+            $article = $manager->getArticle($id);
+            $manager->deleteArticle($article);
+            home();
+
+        }
     }
 }
 
@@ -160,5 +198,7 @@ function admin_disconnect() {
 
 
 function test() {
+
+
 
 }

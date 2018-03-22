@@ -2,9 +2,10 @@
 
 {% block content %}
 
+
     <form action="http://localhost/blog/?page=post_article" method=POST>
-        Titre:<br><input type="text" name="titre"><br>
-        texte:<br><input type="text" name="texte"><br>
+        Titre:<input name="article[0][titre]"/>
+        texte:<input name="article[0][texte]"/>
         <input type="submit" value="Submit">
     </form>
 

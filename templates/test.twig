@@ -2,13 +2,11 @@
 
 {% block content %}
 
- <p>lol</p>
-
-
-{% endblock %}
-
-{% block script %}
-
+ <form action="http://localhost/blog/?page=test" method=POST>
+  Titre:<input name="article[0][titre]" value="john" />
+  texte:<input name="article[0][texte]" value="smith" />
+  <input type="submit" value="Submit">
+ </form>
 
 
 {% endblock %}

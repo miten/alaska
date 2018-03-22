@@ -66,7 +66,6 @@ h3 {
 .content {
 	padding-top: 3rem !important;
 	padding-bottom: 3rem !important;
-	background-image: url('../img/flocon.png');
 }
 
 
@@ -185,28 +184,63 @@ h3 {
 
     margin: 0 auto;
     width: 70%;
+    background-color: #F3F3F3;
+    min-height: 100px;
+    height:auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
-.texte_commentaire {
-    margin-left: auto;
-    margin-right: auto;
 
+.commentaire {
+    margin-bottom: 3%;
+    border-bottom: 1.5px solid grey;
+    padding-left: 8%;
+    padding-right: 8%;
 
 }
+
+
+.header_commentaire {
+
+    height: 74px;
+    width: auto;
+    background-color: #F3F3F3;
+    border-bottom: 2px solid black;
+    padding: 5px 15px;
+}
+
+
 
 .auteur_commentaire > h4 {
 
-    font-size: 2em;
+    font-size: 1.5em;
     color: #373aa0;
     font-weight: bold;
 
 }
 
-.texte_commentaire {
 
+
+.auteur_commentaire > p {
+
+    font-size: 0.8em;
+    color: #373aa0;
+
+}
+
+
+
+.texte_commentaire {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3%;
 
 
 }
+
+
+
 
 .texte_commentaire > p {
 
@@ -215,9 +249,10 @@ h3 {
 }
 
 
-.wiziwig {
+.comment_form {
     margin: 0 auto;
     width: 70%;
+    background-color: #EEE;
 }
 
 

@@ -1,8 +1,5 @@
 <?php
 
-require 'Database.php';
-
-
 
 function getArticles() {
 
@@ -24,6 +21,18 @@ function getArticle($id) {
 
 
 
+function addArticle($titre, $texte) {
+
+    $db = new Database();
+    $sql = "INSERT INTO articles (titre, texte) VALUES ('$titre', '$texte')";
+
+    $db->getPDO()->exec($sql);
+
+
+}
+
+
+
 
 function deleteArticle($id) {
 
@@ -36,8 +45,7 @@ function deleteArticle($id) {
 
 
 
-
-function getCommentaires($id_article) {
+function getComment($id_article) {
     $db = new Database();
     $commentaires = $db->query('SELECT * FROM commentaires WHERE id_article='.$id_article.'');
     return $commentaires;
@@ -47,14 +55,11 @@ function getCommentaires($id_article) {
 
 
 
-
-function addArticle($titre, $texte) {
+function deleteComment($id) {
 
     $db = new Database();
-    $sql = "INSERT INTO articles (titre, texte) VALUES ('$titre', '$texte')";
-
+    $sql = 'DELETE FROM commentaires WHERE id='.$id.'';
     $db->getPDO()->exec($sql);
-
 
 }
 

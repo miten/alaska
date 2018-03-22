@@ -53,9 +53,13 @@ if (isset($_GET['page'])) {
 
 
 
+        case 'delete_article':
+            delete_article();
+            break;
 
-        case 'delete':
-            delete();
+
+        case 'delete_comment':
+            delete_comment();
             break;
 
 
@@ -78,5 +82,6 @@ if (isset($_GET['page'])) {
 }
 
 else {
-    echo ("error");
+    home();
+
 }
