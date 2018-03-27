@@ -19,7 +19,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
     <!-- Custom styles for this template -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="web/css/style.css" rel="stylesheet">
+    <link href="web/css/comment_style.css" rel="stylesheet">
 
 </head>
 
@@ -46,8 +48,8 @@
                 </li>
                 <li class="nav-item" style="margin-left:10%;">
 
-                    {% if session.statut == false %} <a class="nav-link" href="http://localhost/blog/?page=admin_connect"><img src="web/img/lock.svg" width="25em" height="auto"></a>{% endif %}
-                    {% if session.statut == true %}<a class="nav-link" href="http://localhost/blog/?page=admin_disconnect"><img src="web/img/exit.svg" width="25em" height="auto"></a>{% endif %}
+                    {% if session.statut == false %} <a class="nav-link" href="http://localhost/blog/?page=admin_connect"><i  title="Connexion" class="fa fa-sign-in fa-2x" aria-hidden="true"></i></a>{% endif %}
+                    {% if session.statut == true %}<a class="nav-link" href="http://localhost/blog/?page=admin_disconnect"><i  title="Deconnexion" class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>{% endif %}
                 </li>
 
             </ul>

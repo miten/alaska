@@ -21,6 +21,8 @@ class Commentaire
 
     private $id_article;
 
+    private $signalement;
+
     /**
      * Commentaire constructor.
      * @param $id
@@ -34,28 +36,31 @@ class Commentaire
 
     public function __construct(array $rows)
     {
-        if (isset($rows['id'])) {
-            $this->id = ($rows['id']);
+        if (!isset ($rows['id'])){
+
+            $this->auteur = ($rows['auteur']);
+            $this->texte = ($rows['texte']);
+            $this->setDate(new DateTime);
+            $this->id_article = ($rows['id_article']);
+            $this->setSignalement(0);
+
         }
 
-        $this->auteur = ($rows['auteur']);
-        $this->texte = ($rows['texte']);
-        $this->setDate();
-        $this->id_article = ($rows['id_article']);
+        else {
+            $this->hydrate($rows);
+        }
+
     }
 
 
     public function hydrate(array $rows) {
-
         $this->setId($rows['id']);
         $this->setAuteur($rows['auteur']);
         $this->settexte($rows['texte']);
-        $this->setdate();
+        $this->setdate($rows['date']);
         $this->setIdArticle($rows['id_article']);
+        $this->setSignalement($rows['signalement']);
     }
-
-
-
 
 
     /**
@@ -111,17 +116,16 @@ class Commentaire
      */
     public function getDate()
     {
+
         return $this->date;
     }
 
     /**
      * @param DateTime $date
      */
-    public function setDate()
+    public function setDate($date)
     {
 
-        $date = new DateTime();
-        $date->format('Y-m-d H:i:s');
         $this->date = $date;
     }
 
@@ -140,6 +144,26 @@ class Commentaire
     {
         $this->id_article = $id_article;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getSignalement()
+    {
+        return $this->signalement;
+    }
+
+    /**
+     * @param mixed $signalement
+     */
+    public function setSignalement($signalement)
+    {
+        $this->signalement = $signalement;
+    }
+
+
+
 
 
 

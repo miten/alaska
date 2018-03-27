@@ -10,9 +10,7 @@
 
             <div class="articles">
                 <div class="header_articles">
-                    <div class="title_header">
-                        <a href="http://localhost/blog/?page=article&id={{ article.id }}"><h3>{{ article.titre | convert_encoding('UTF-8', 'ISO-8859-1') }}</h3></a>
-                    </div>
+                    <a href="http://localhost/blog/?page=article&id={{ article.id }}"><h3 class="title_header">{{ article.titre | convert_encoding('UTF-8', 'ISO-8859-1')  }}</h3></a>
                 </div>
                 <div class="body_articles">
                     <p>{{ article.texte|slice(0, 500)| convert_encoding('UTF-8', 'ISO-8859-1') }} ... <p>

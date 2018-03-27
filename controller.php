@@ -19,7 +19,6 @@ function home(){
     $manager = new ArticleManager();
     $articles = $manager->getArticles();
 
-
     echo $twig->render('articles.twig', array('articles' => $articles));
 }
 
@@ -199,6 +198,8 @@ function admin_disconnect() {
 
 function test() {
 
-
+    $ahah = new CommentaireManager();
+    $ahah = $ahah->getCommentaire(58);
+    var_dump($ahah);
 
 }

@@ -21,43 +21,48 @@ class Article {
      */
 
 
-    public function __construct(array $rows) {
+    public function __construct(array $rows)
+    {
 
-        if (isset($rows['id'])) {
-        $this->id = ($rows['id']);
+        if (!isset ($rows['id'])) {
+            $this->titre = ($rows['titre']);
+            $this->texte = ($rows['texte']);
+            $this->setDate(new DateTime);
+        }
+
+        else {
+            $this->hydrate($rows);
+        }
     }
-        $this->titre = ($rows['titre']);
-        $this->texte = ($rows['texte']);
-        $this->setDate();
-    }
+
+
 
 
     public function hydrate(array $rows) {
         $this->setId($rows['id']);
         $this->setTitre($rows['titre']);
         $this->setTexte($rows['texte']);
-        $this->setDate();
+        $this->setdate($rows['date']);
     }
+
+
+
 
     /**
      * @return DateTime
      */
     public function getDate()
     {
-
-        return  $this->date->format('Y-m-d H:i:s');
-
-
-
+        return $this->date;
     }
+
+
 
     /**
      * @param DateTime $date
      */
-    public function setDate()
+    public function setDate($date)
     {
-        $date = new DateTime();
-        $date->format('Y-m-d H:i:s');
         $this->date = $date;
     }
 

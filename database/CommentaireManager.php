@@ -34,7 +34,7 @@ class CommentaireManager
     {
 
 
-        $q = $this->_db->prepare('INSERT INTO commentaires (auteur, texte, date, id_article) VALUES(:auteur, :texte, :date, :id_article)');
+        $q = $this->_db->prepare('INSERT INTO commentaires (auteur, texte, date, id_article, signalement) VALUES(:auteur, :texte, :date, :id_article, :signalement)');
 
 
         $q->bindValue(':auteur', $commentaire->getAuteur());
@@ -44,6 +44,8 @@ class CommentaireManager
         $q->bindValue(':date', $commentaire->getDate()->format('Y/m/d'));
 
         $q->bindValue(':id_article', $commentaire->getIdArticle());
+
+        $q->bindValue(':signalement', $commentaire->getSignalement());
 
         $q->execute();
 
@@ -105,6 +107,8 @@ class CommentaireManager
         return $commentaires;
 
     }
+
+
 
 
 
