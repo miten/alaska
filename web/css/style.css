@@ -115,6 +115,7 @@ h3 {
     color: #D14B4B;
     float: right;
     margin-top: 15px;
+    cursor: pointer
 }
 
 
@@ -179,6 +180,10 @@ h3 {
 
 }
 
+.footer_articles p {
+
+margin-right: 10px;
+}
 
 .footer_articles > p {
     float: right;

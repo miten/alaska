@@ -7,9 +7,9 @@
 
             <div class="articles">
                 <div class="header_articles">
-                    <a href="http://localhost/blog/?page=article&id={{ article.id }}"><h3 class="title_header">{{ article.titre | convert_encoding('UTF-8', 'ISO-8859-1')  }}</h3></a>
+                    <h3 class="title_header">{{ article.titre | convert_encoding('UTF-8', 'ISO-8859-1')  }}</h3>
                     {% if session.statut == true %}
-                        <a href="http://localhost/blog/?page=delete_article&id={{ article.id }}"><i id="delete_icon" title="Supprimer" class="far fa-trash-alt fa-lg" aria-hidden="true"></i></a>
+                        <i onclick="delete_articleFunction({{ article.id }})" id="delete_icon" title="Supprimer" class="far fa-trash-alt fa-lg" aria-hidden="true"></i>
                         <i id="modify_icon" title="Editer" class="fas fa-pencil-alt fa-lg" aria-hidden="true"></i>
                     {% endif %}
                 </div>
@@ -109,7 +109,7 @@
         <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=218h2ppq5qps0std3k5qz1z6p9lnpisfzwt2z9b2z0kum0ri"></script>
 
 
-        <script>
+        <script  type="text/javascript">
 
          function delete_commentFunction($id) {
 
@@ -133,37 +133,56 @@
             });
         }
 
-    </script>
+
+
+         function delete_articleFunction($id) {
+
+             $.ajax({
+
+                 url : 'http://localhost/blog/?page=delete_article',
+
+                 type : 'POST',
+
+                 data:"id="+$id,
+
+                 success : function(){
+                     window.location.replace("http://localhost/blog/?page=home");
+
+
+                 }
+             });
+         }
+
+        </script>
+
 
      {% else %}
 
 
-         <script>
+        <script  type="text/javascript">
 
-             function advert_commentFunction($id) {
-
-
-                 $.ajax({
-
-                     url : 'http://localhost/blog/?page=advert_comment',
-
-                     type : 'POST',
-
-                     data:"id="+$id,
-
-                     success : function(){
-
-                         $( "#signalement_icon_inactive_"+$id).fadeTo(500, 0, function(){
-                             $( "#signalement_icon_inactive_"+$id).css("display", "none");
-                         }); //
+            function advert_commentFunction($id) {
 
 
-                     }
-                 });
-             }
+                $.ajax({
 
-         </script>
+                    url : 'http://localhost/blog/?page=advert_comment',
 
+                    type : 'POST',
+
+                    data:"id="+$id,
+
+                    success : function(){
+
+                        $( "#signalement_icon_inactive_"+$id).fadeTo(500, 0, function(){
+                            $( "#signalement_icon_inactive_"+$id).css("display", "none");
+                        }); //
+
+
+                    }
+                });
+            }
+        </script>
 
     {% endif %}
 

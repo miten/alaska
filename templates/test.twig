@@ -2,38 +2,7 @@
 
 {% block content %}
 
- <i onclick="deleteFunction(10)" title="Supprimer" id="delete_icon_2" class="far fa-trash-alt fa-lg" aria-hidden="true"></i>
-
-
-
-
-{% block script %}
-
-
-
-     <script>
-
-         function deleteFunction($id) {
-
-             $.ajax({
-
-                 url : 'http://localhost/blog/?page=test',
-
-                 type : 'POST',
-
-                 data:"m="+$id,
-                 success : function(response){
-                      alert(response);
-                     $("#ohoh").html(response);
-
-
-                 }
-             });
-         }
-
-     </script>
-
-
 
 
 {% endblock %}
+

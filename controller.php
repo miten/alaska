@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 require 'entity/Article.php';
 require 'database/ArticleManager.php';
 require 'database/CommentaireManager.php';
-
+require 'database/AdminManager.php';
 
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
 $twig= new Twig_Environment($loader, ['cache' => false]);
@@ -157,26 +157,19 @@ function delete_comment()
 }
 
 
-
-
 function delete_article(){
 
-    global $twig;
-    if (isset($_SESSION)) {
-        $twig->addGlobal("session", $_SESSION);
-    }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
             $manager = new ArticleManager();
             $article = $manager->getArticle($id);
 
             $managers = new CommentaireManager();
             $managers->deleteArticleCommentaires($article);
-
             $manager->deleteArticle($article);
-            return home();
+
 
         }
     }
@@ -189,19 +182,26 @@ function admin_connect() {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+        $username = stripslashes($_POST['username']);
+        $password = stripslashes($_POST['password']);
+
+        $manager = new AdminManager();
+        $result = $manager->adminLogin($username, $password);
+
+
         switch(true) {
 
-            case ($_POST['username'] == 'miten' && $_POST['password'] == 'miten'):
+            case ($result):
                 $_SESSION['statut'] = true;
                 $twig->addGlobal("session", $_SESSION);
                 home();
                 break;
 
-            case ($_POST['username'] == null  ||  $_POST['password'] == null ):
+            case ($username == null  ||  $password == null ):
                 echo $twig->render('admin_connect.twig', array('error_message' => 'Champs manquant'));
                 break;
 
-            case ($_POST['username'] != 'miten' || $_POST['password'] != 'miten'):
+            case ($result == false):
                 echo $twig->render('admin_connect.twig', array('error_message' => 'Identifiants incorrects'));
                 break;
         }
@@ -227,21 +227,5 @@ function admin_disconnect() {
 
 function test() {
     global $twig;
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        $ahah = (int) ($_POST['m']);
-
-
-        $template = $twig->render('ajax.twig');
-        echo json_encode($template);
-        exit();
-
-    }
-
     echo $twig->render('test.twig');
-
-
-
-
-
 }
