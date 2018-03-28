@@ -46,7 +46,7 @@ function article($id = null){
 
 
         $manage = new CommentaireManager();
-        $commmentaires = $manage->getCommentaires($id);
+        $commmentaires = $manage->getCommentaires($article);
 
         echo $twig->render('article.twig', array('article' => $article,'commentaires' => $commmentaires));
 
@@ -87,15 +87,45 @@ function post_comment() {
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $manager = new CommentaireManager();
-        $commentaire = new Commentaire($_POST['commentaire'][0]);
-        $manager->addCommentaire($commentaire);
-        article($commentaire->getIdArticle());
+
+
+        switch(true) {
+
+            case ($_POST['commentaire'][0]['auteur'] == null  ||  $_POST['commentaire'][0]['texte']  == null ):
+                article($_POST['commentaire'][0]['id_article']);
+                break;
+
+            case ($_POST['commentaire'][0]['auteur'] != null  &&  $_POST['commentaire'][0]['texte']  != null ):
+                $manager = new CommentaireManager();
+                $commentaire = new Commentaire($_POST['commentaire'][0]);
+                $manager->addCommentaire($commentaire);
+                article($commentaire->getIdArticle());
+                break;
+        }
 
     }
 
 }
 
+
+function advert_comment() {
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+
+
+            $managers = new CommentaireManager();
+            $commentaire = $managers->getCommentaire($id);
+            $commentaire->setSignalement($commentaire->getSignalement()+ 1);
+            $managers->advertCommentaire($commentaire);
+
+        }
+
+    }
+
+}
 
 
 function myself(){
@@ -109,23 +139,17 @@ function myself(){
 
 
 
-function delete_comment(){
+function delete_comment()
+{
 
-    global $twig;
-    if (isset($_SESSION)) {
-        $twig->addGlobal("session", $_SESSION);
-    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $manager = new CommentaireManager();
-            $commentaire = $manager->getCommentaire($id);
-            $id_article = $commentaire->getIdArticle();
-            $manager->deleteCommentaire($commentaire);
-            article($id_article);
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            $managers = new CommentaireManager();
+            $commentaire = $managers->getCommentaire($id);
+            $managers->deleteCommentaire($commentaire);
+            die();
         }
 
     }
@@ -147,12 +171,17 @@ function delete_article(){
             $id = $_GET['id'];
             $manager = new ArticleManager();
             $article = $manager->getArticle($id);
+
+            $managers = new CommentaireManager();
+            $managers->deleteArticleCommentaires($article);
+
             $manager->deleteArticle($article);
-            home();
+            return home();
 
         }
     }
 }
+
 
 
 function admin_connect() {
@@ -197,9 +226,22 @@ function admin_disconnect() {
 
 
 function test() {
+    global $twig;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $ahah = new CommentaireManager();
-    $ahah = $ahah->getCommentaire(58);
-    var_dump($ahah);
+        $ahah = (int) ($_POST['m']);
+
+
+        $template = $twig->render('ajax.twig');
+        echo json_encode($template);
+        exit();
+
+    }
+
+    echo $twig->render('test.twig');
+
+
+
+
 
 }

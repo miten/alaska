@@ -16,10 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
-    <!-- Custom styles for this template -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
     <link href="web/css/style.css" rel="stylesheet">
     <link href="web/css/comment_style.css" rel="stylesheet">
 
@@ -48,8 +45,8 @@
                 </li>
                 <li class="nav-item" style="margin-left:10%;">
 
-                    {% if session.statut == false %} <a class="nav-link" href="http://localhost/blog/?page=admin_connect"><i  title="Connexion" class="fa fa-sign-in fa-2x" aria-hidden="true"></i></a>{% endif %}
-                    {% if session.statut == true %}<a class="nav-link" href="http://localhost/blog/?page=admin_disconnect"><i  title="Deconnexion" class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>{% endif %}
+                    {% if session.statut == false %} <a class="nav-link" href="http://localhost/blog/?page=admin_connect"><i  title="Connexion" class="fas fa-sign-in-alt fa-2x" aria-hidden="true"></i></a>{% endif %}
+                    {% if session.statut == true %}<a class="nav-link" href="http://localhost/blog/?page=admin_disconnect"><i  title="Deconnexion" class="fas fa-sign-out-alt fa-2x" aria-hidden="true"></i></a>{% endif %}
                 </li>
 
             </ul>

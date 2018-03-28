@@ -75,7 +75,7 @@ h3 {
 
 .articles {
 	height: auto;
-	width: 65%;
+    width: 80%;
 	margin: 0 auto;
 	background-color: white;
     margin-bottom: 10%;
@@ -115,13 +115,49 @@ h3 {
     color: #D14B4B;
     float: right;
     margin-top: 15px;
+}
+
+
+#delete_icon_2 {
+
+    color: darkslategrey;
     float: right;
+    margin-top: 5px;
+
 
 }
 
 
+#signalement_icon_inactive {
+
+    color: darkslategrey;
+    float: right;
+    margin-top: 5px;
+
+}
+
+
+#signalement_icon_active {
+
+    color: #D14B4B;
+    float: right;
+    margin-top: 5px;
+
+
+}
+
+
+
+#advert_icon {
+
+    color: #D14B4B;
+
+}
+
+
+
 .body_articles {
-	padding: 35px 15px;
+	padding: 35px 50px;
 	height: auto;
 	width: auto;
 	background-color: white;
@@ -132,6 +168,7 @@ h3 {
 .body_articles p {
 
 	font-family: 'Varela Round', sans-serif;
+    word-spacing: 2px;
 }
 
 
@@ -155,6 +192,8 @@ h3 {
 .texte_article p {
 
 	font-family: 'Varela Round', sans-serif;
+    text-indent: 10px;
+
 }
 
 .commentaires {
@@ -230,7 +269,26 @@ h3 {
     margin: 0 auto;
     width: 70%;
     background-color: #EEE;
+    height: auto;
+    padding: 20px 40px;
+    border-radius: 10px 10px 0px 0px;
+
 }
+
+
+#submit_comment_btn {
+
+    float: right;
+    background-color: #34495E;
+}
+
+
+#submit_comment_btn:hover {
+
+    float: right;
+    background-color: #2E6194;
+}
+
 
 
 /* Page login  */
@@ -275,6 +333,11 @@ h3 {
 
 }
 
+
+.form-group label {
+    color: #34495E;
+
+}
 
 
 /* footer */

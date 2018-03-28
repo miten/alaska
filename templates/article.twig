@@ -9,8 +9,8 @@
                 <div class="header_articles">
                     <a href="http://localhost/blog/?page=article&id={{ article.id }}"><h3 class="title_header">{{ article.titre | convert_encoding('UTF-8', 'ISO-8859-1')  }}</h3></a>
                     {% if session.statut == true %}
-                        <a href="http://localhost/blog/?page=delete_article&id={{ article.id }}"><i id="delete_icon" title="supprimer" class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-                        <i id="modify_icon" title="editer" class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                        <a href="http://localhost/blog/?page=delete_article&id={{ article.id }}"><i id="delete_icon" title="Supprimer" class="far fa-trash-alt fa-lg" aria-hidden="true"></i></a>
+                        <i id="modify_icon" title="Editer" class="fas fa-pencil-alt fa-lg" aria-hidden="true"></i>
                     {% endif %}
                 </div>
                 <div class="body_articles">
@@ -25,13 +25,27 @@
             {% if session.statut != true %}
 
                 <div class="comment_form">
-
-                    <form action="http://localhost/blog/?page=post_comment" method=POST>
-                        Titre:<input name="commentaire[0][auteur]"/>
-                        texte:<input name="commentaire[0][texte]"/>
-                        <input style="visibility: hidden;" value="{{ article.id }}" name="commentaire[0][id_article]">
-                        <input type="submit" value="Submit">
+                    <h3 style="color: #34495E; margin-bottom: 30px;">Poster un commentaire</h3>
+                    <form action="http://localhost/blog/?page=post_comment" method="POST">
+                        <div class="form-group" id="error_message">
+                            <p>{{ error_message }} {% if error_message != null %} <i title="Erreur" id="signalement_icon_active" class="fas fa-exclamation-circle fa-lg"></i> {% endif %} </p>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-10">Auteur</label>
+                            <div class="col-sm-6 col-xs-12">
+                            <input maxlength="25" minlength="3" type="text" name="commentaire[0][auteur]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12">Message</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <textarea maxlength="200" minlength="5" type="text" name="commentaire[0][texte]" class="form-control" id="exampleInputPassword1" placeholder=""></textarea>
+                            </div>
+                        </div>
+                        <input style="display: none;" type="number" name="commentaire[0][id_article]" value="{{ article.id }}">
+                        <button type="submit" id="submit_comment_btn" class="btn btn-primary">Envoyer</button>
                     </form>
+                </div>
 
                 </div>
 
@@ -50,12 +64,11 @@
 
 
             <div class="comments-container">
-                <h1>Commentaires</h1>
 
                 <ul id="comments-list" class="comments-list">
                     {% for commentaire in commentaires %}
-                    <li>
-                        <div class="comment-main-level" id="commentaire_{{ commentaire.id }}">
+                    <li  id="commentaire_{{ commentaire.id }}">
+                        <div class="comment-main-level">
                             <!-- Avatar -->
                             <div class="comment-avatar"><img class="user" src="web/img/user.svg"></div>
                             <!-- Commentaires -->
@@ -64,9 +77,10 @@
                                     <h6 class="comment-name">{{ commentaire.auteur | convert_encoding('UTF-8', 'ISO-8859-1') }}</h6>
                                     <span>{{ commentaire.date|date("d/m/Y") }}</span>
                                     {% if session.statut == true %}
-                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <i onclick="delete_commentFunction({{ commentaire.id }})" title="Supprimer" id="delete_icon_2" class="far fa-trash-alt fa-lg" aria-hidden="true"></i>
+                                        {% if commentaire.signalement > 2 %}<i id="signalement_icon_active" class="fas fa-exclamation-circle fa-lg"></i>{% endif %}
                                     {% else %}
-                                        <i class="fa fa-ban" id="delete_icon" aria-hidden="true"></i>
+                                        <i onclick="advert_commentFunction({{ commentaire.id }})" title="Signaler" id="signalement_icon_inactive_{{ commentaire.id }}" class="fas fa-exclamation-circle fa-lg"></i>
                                     {% endif %}
                                 </div>
                                 <div class="comment-content">
@@ -79,8 +93,6 @@
                 </ul>
             </div>
 
-        </div>
-
     </section>
 
 {% endblock %}
@@ -90,48 +102,70 @@
 {% block script %}
 
 
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=218h2ppq5qps0std3k5qz1z6p9lnpisfzwt2z9b2z0kum0ri"></script>
+
+    {% if session.statut == true %}
 
 
-
-    <script type="text/javascript">
-
-        tinymce.init({
-            width: "70%",
-            height: "50px",
-            selector: "textarea",
-            plugins: "a11ychecker, advcode, linkchecker, media mediaembed, powerpaste, tinymcespellchecker",
-            toolbar: "a11ycheck, code"
-        });
+        <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=218h2ppq5qps0std3k5qz1z6p9lnpisfzwt2z9b2z0kum0ri"></script>
 
 
+        <script>
 
-        window.onload = function(){
+         function delete_commentFunction($id) {
 
-            var btn = document.getElementById('SubmitBtn');
 
-            btn.onclick = function(){
+            $.ajax({
 
-                //This MUST alert HTML content of editor.
-                alert( tinyMCE.activeEditor.getContent() );
-            }
+                url : 'http://localhost/blog/?page=delete_comment',
+
+                type : 'POST',
+
+                data:"id="+$id,
+
+                success : function(){
+
+                    $( "#commentaire_"+$id).fadeTo(500, 0, function(){
+                        $( "#commentaire_"+$id).css("display", "none");
+                    }); //
+
+
+                }
+            });
         }
 
     </script>
 
-    <script>
-        $(document).ready(function() {
-            $("#get-data-form").submit(function(e){
-                var content = tinymce.get("texteditor").getContent();
-                alert(content);
-            });
-        });
-        $.ajax({
-            url: "test.html",
-            context: document.body
-        }).done(function() {
-            $( this ).addClass( "done" );
-        });
-    </script>
+     {% else %}
+
+
+         <script>
+
+             function advert_commentFunction($id) {
+
+
+                 $.ajax({
+
+                     url : 'http://localhost/blog/?page=advert_comment',
+
+                     type : 'POST',
+
+                     data:"id="+$id,
+
+                     success : function(){
+
+                         $( "#signalement_icon_inactive_"+$id).fadeTo(500, 0, function(){
+                             $( "#signalement_icon_inactive_"+$id).css("display", "none");
+                         }); //
+
+
+                     }
+                 });
+             }
+
+         </script>
+
+
+    {% endif %}
+
 
 {% endblock %}

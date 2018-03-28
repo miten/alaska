@@ -54,7 +54,7 @@ class ArticleManager
         $id = (int) $id;
 
 
-        $q = $this->_db->query('SELECT * FROM articles WHERE id = '.$id);
+        $q = $this->_db->query('SELECT * FROM articles WHERE id = '.$id.' ORDER BY date DESC');
 
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
 

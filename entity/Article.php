@@ -2,7 +2,7 @@
 
 
 
-class Article {
+class Article  {
 
 
     private $id;
@@ -113,23 +113,6 @@ class Article {
     public function setTexte($texte)
     {
         $this->texte = $texte;
-    }
-
-
-    public function getCommentairesArticle()
-
-    {
-
-        $id = (int) $this->getId();
-
-        $q = $this->_db->query('SELECT * FROM articles WHERE id = '.$id);
-
-        $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
-        $commentaire = new Commentaire($donnees);
-
-        return $commentaire;
-
     }
 
 

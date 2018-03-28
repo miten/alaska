@@ -10,7 +10,7 @@
  * Lista de Comentarios
  =======================*/
 .comments-container {
-	margin: 60px auto 15px;
+	margin: auto;
 	width: 768px;
 }
 
@@ -28,6 +28,7 @@
 .comments-list {
 	margin-top: 30px;
 	position: relative;
+	margin-left: -15px;
 }
 
 /**

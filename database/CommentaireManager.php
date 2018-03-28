@@ -29,6 +29,16 @@ class CommentaireManager
     }
 
 
+    public function advertCommentaire(Commentaire $commentaire){
+        $signalement = (int) $commentaire->getSignalement();
+        $id = (int) $commentaire->getId();
+
+        $q = $this->_db->prepare('UPDATE commentaires SET signalement = '.$signalement.' WHERE id = '.$id);
+        $q->execute();
+
+    }
+
+
     public function addCommentaire(Commentaire $commentaire)
 
     {
@@ -52,13 +62,6 @@ class CommentaireManager
     }
 
 
-    public function deleteCommentaire(Commentaire $commentaire)
-
-    {
-
-        $this->_db->exec('DELETE FROM commentaires WHERE id = '.$commentaire->getId());
-
-    }
 
 
 
@@ -67,13 +70,12 @@ class CommentaireManager
 
     {
 
-        $id = (int) $id;
 
+        $id = (int) $id;
 
         $q = $this->_db->query('SELECT * FROM commentaires WHERE id = '.$id);
 
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
-
 
         $commentaire = new Commentaire($donnees);
 
@@ -85,15 +87,15 @@ class CommentaireManager
 
 
 
-    public function getCommentaires($id)
+    public function getCommentaires(Article $article)
 
     {
 
         $commentaires = [];
 
-        $id = (int) $id;
+        $id = $article->getId();
 
-        $q = $this->_db->query('SELECT * FROM commentaires WHERE id_article = '.$id);
+        $q = $this->_db->query('SELECT * FROM commentaires WHERE id_article = '.$id.' ORDER BY date ASC') ;
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
 
@@ -107,6 +109,30 @@ class CommentaireManager
         return $commentaires;
 
     }
+
+
+
+
+    public function deleteArticleCommentaires(Article $article)
+
+    {
+        $id = $article->getId();
+
+        $this->_db->exec('DELETE FROM commentaires WHERE id_article = '.$id);
+
+    }
+
+
+
+    public function deleteCommentaire(Commentaire $commentaire)
+
+    {
+        $id = $commentaire->getId();
+
+        $this->_db->exec('DELETE FROM commentaires WHERE id = '.$id);
+
+    }
+
 
 
 

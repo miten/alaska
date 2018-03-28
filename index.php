@@ -38,6 +38,12 @@ if (isset($_GET['page'])) {
             break;
 
 
+        case 'advert_comment':
+
+            advert_comment();
+            break;
+
+
 
         case 'admin_connect':
 
