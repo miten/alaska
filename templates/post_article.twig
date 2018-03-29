@@ -1,31 +1,38 @@
 {% extends "home.twig" %}
 
 {% block content %}
+    <section class="content">
+        <div class="container">
 
-
-    <div id="wiziwig" class="row">
-        <div class="" style="margin-left: 90px; margin-bottom: 50px;">
-            <form action="http://localhost/blog/?page=modify_article" id="texte_article_modify" method="POST">
-                <textarea name="article[0][texte]" class="tinymce" id="texteditor"></textarea>
-                <button type="submit" id="wiziwig_btn" class="btn btn-primary">Envoyer</button>
-            </form>
+            <div id="wiziwig">
+                <div class="" style="margin-left: 90px; margin-bottom: 50px;">
+                    <form action="http://localhost/blog/?page=post_article" id="post_article_form" method="POST">
+                        <input maxlength="120" minlength="3" type="text" placeholder="Titre" name="article[0][titre]" id="titre_article_form">
+                        <textarea maxlength="120" minlength="3" type="text" name="article[0][texte]" class="tinymce" id="texteditor"></textarea>
+                        <button type="submit" id="wiziwig_btn" class="btn btn-primary">Envoyer</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
 
+    </section>
 {% endblock %}
 
 {% block script %}
 
 <script>
+
     window.onload = function() {
         tinymce.init({
             width: "100%",
-            height: "100px",
+            height: "400px",
             selector: "textarea",
-            plugins: "a11ychecker, advcode, linkchecker, media mediaembed, powerpaste, tinymcespellchecker",
-            toolbar: "a11ycheck, code"
+            mode : "exact",
+            elements : "description,notes",
+            plugins: "a11ychecker, linkchecker, powerpaste"
         });
-    }
+    };
+
 </script>
 
 

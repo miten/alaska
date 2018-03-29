@@ -59,10 +59,10 @@ if (isset($_GET['page'])) {
 
 
 
-
         case 'modify_article':
             modify_article();
             break;
+
 
 
         case 'delete_article':
@@ -75,16 +75,8 @@ if (isset($_GET['page'])) {
             break;
 
 
-        case 'test':
-            test();
-            break;
-
-
-
-
         default:
-            header('HTTP/1.0 404 NOT FOUND');
-            echo $twig->render('404.twig');
+            echo $twig->render('error.twig', array('error' => 'Perdu ?'));
             break;
 
     }

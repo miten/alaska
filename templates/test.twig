@@ -2,7 +2,26 @@
 
 {% block content %}
 
+    <form id="myForm" method="POST" action="?page=test">
+        <textarea value="ferf" name="question_text" id="question_text" style="width:543px;height:250px;"></textarea>
+        <button type="submit" id="wiziwig_btn" class="btn btn-primary">Envoyer</button>
+    </form>
 
+    {{ message }}
 
 {% endblock %}
 
+{% block script %}
+
+<script>
+    tinymce.init({
+        width: "60%",
+        height: "100px",
+        selector: "textarea",
+        plugins: "a11ychecker, advcode, linkchecker, media mediaembed, powerpaste, tinymcespellchecker",
+        toolbar: "a11ycheck, code"
+    });
+
+</script>
+
+{% endblock %}

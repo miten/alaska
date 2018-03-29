@@ -13,7 +13,7 @@ class ArticleManager
 
     {
 
-        $db = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
+         $db = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->setDb($db);
 
@@ -31,7 +31,7 @@ class ArticleManager
 
         $q->bindValue(':texte', $article->getTexte());
 
-        $q->bindValue(':date', $article->getDate());
+        $q->bindValue(':date', $article->getDate()->format('Y/m/d'));
 
         $q->execute();
 
@@ -59,10 +59,15 @@ class ArticleManager
 
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
+        if (empty($donnees)) {
+            return false;
+        }
 
-        $article = new Article($donnees);
+        else {
+            $article = new Article($donnees);
 
-        return $article;
+            return $article;
+        }
 
     }
 

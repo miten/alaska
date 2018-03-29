@@ -39,15 +39,22 @@ function article($id = null){
 
     if (isset($id)||isset($idd)) {
         $id = $id ?: $idd;
-    }
 
         $manager = new ArticleManager();
         $article = $manager->getArticle($id);
 
-        $commmentaires  = $article->getCommentaires();
+        if (empty($article)) {
+            echo $twig->render('error.twig', array('error' => 'Article introuvable'));
+        }
 
-        echo $twig->render('article.twig', array('article' => $article,'commentaires' => $commmentaires));
+        else {
 
+            $commmentaires = $article->getCommentaires();
+            echo $twig->render('article.twig', array('article' => $article, 'commentaires' => $commmentaires));
+
+        }
+
+    }
 
 
 }
@@ -60,17 +67,22 @@ function post_article() {
         $twig->addGlobal("session", $_SESSION);
     }
 
-
-    if (isset($_POST['texte'])) {
-
-        $manager = new ArticleManager();
-
-        $article = new Article($_POST['article'][0]);
-
-        $manager->addArticle($article);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
-        return home();
+        if (isset($_POST['article'][0]['texte']) && isset($_POST['article'][0]['titre'])) {
+
+            $article = $_POST['article'][0];
+
+            $manager = new ArticleManager();
+            $article = new Article($article);
+            $manager->addArticle($article);
+            return home();
+        }
+
+        else  {
+            echo $twig->render('error.twig', array('error' => 'Action impossible'));
+        }
     }
 
     echo $twig->render('post_article.twig');
@@ -88,7 +100,6 @@ function post_comment() {
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
 
         switch(true) {
 
@@ -124,6 +135,13 @@ function advert_comment() {
 
         }
 
+        else {
+
+            global $twig;
+            echo $twig->render('error.twig', array('error' => 'Action impossible'));
+
+        }
+
     }
 
 }
@@ -155,15 +173,22 @@ function delete_comment()
 
     }
 
+    else {
+        global $twig;
+        echo $twig->render('error.twig', array('error' => 'Action impossible'));
+    }
+
+
+
 }
 
 function modify_article(){
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['texte']) && isset($_POST['titre'])) {
+        if (isset($_POST['article'][0]['texte']) && isset($_POST['article'][0]['titre']) && isset($_POST['article'][0]['article_id'])) {
 
-            $titre = $_POST['titre'];
-            $texte = $_POST['texte'];
-            $id = $_POST['article_id'];
+            $id = $_POST['article'][0]['article_id'];
+            $titre = $_POST['article'][0]['titre'];
+            $texte = $_POST['article'][0]['texte'];
 
             $manager = new ArticleManager();
             $article = $manager->getArticle($id);
@@ -175,13 +200,18 @@ function modify_article(){
         }
     }
 
+    else {
+        global $twig;
+        echo $twig->render('error.twig', array('error' => 'Action impossible'));
+    }
+
 
 }
 
 
 
 function delete_article(){
-
+    global $twig;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['id'])) {
@@ -195,6 +225,18 @@ function delete_article(){
 
 
         }
+
+        else {
+
+            echo $twig->render('error.twig', array('error' => 'Action impossible'));
+
+
+        }
+    }
+
+    else {
+
+        echo $twig->render('error.twig', array('error' => 'Action impossible'));
     }
 }
 
@@ -243,13 +285,4 @@ function admin_disconnect() {
     session_unset();
     home();
 
-}
-
-
-
-
-function test() {
-    global $twig;
-
-    echo $twig->render('test.twig');
 }
