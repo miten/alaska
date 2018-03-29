@@ -38,6 +38,7 @@ class ArticleManager
     }
 
 
+
     public function deleteArticle(Article $article)
 
     {

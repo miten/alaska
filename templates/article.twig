@@ -4,20 +4,20 @@
     <!-- Page Content -->
     <section class="content">
         <div class="container">
-
             <div class="articles">
                 <div class="header_articles">
                     <h3 class="title_header">{{ article.titre | convert_encoding('UTF-8', 'ISO-8859-1')  }}</h3>
                     {% if session.statut == true %}
-                        <i onclick="delete_articleFunction({{ article.id }})" id="delete_icon" title="Supprimer" class="far fa-trash-alt fa-lg" aria-hidden="true"></i>
-                        <i id="modify_icon" title="Editer" class="fas fa-pencil-alt fa-lg" aria-hidden="true"></i>
+                        <i onclick="delete_articleFunction()" id="delete_icon" title="Supprimer" class="far fa-trash-alt fa-lg" aria-hidden="true"></i>
+                        <i onclick="modify_articleFunction()" id="modify_icon" title="Editer" class="fas fa-pencil-alt fa-lg" aria-hidden="true"></i>
                     {% endif %}
                 </div>
                 <div class="body_articles">
                     <p>{{ article.texte | convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
                 </div>
                 <div class="footer_articles">
-                    <p>Publié le {{ article.date|date("d/m/Y") }}</p>
+                    <p>{{ article.date|date("d/m/Y") }}<i  id="icon_footer_articles" class="fas fa-calendar-alt fa-lg"></i></p>
+                    <p id="comment_nmbr"> {{ article.commentaires|length }}<i style="margin-right: 15px;" id="icon_footer_articles" class="fas fa-comments fa-lg"></i></p>
                 </div>
             </div>
 
@@ -52,11 +52,15 @@
 
             {% else %}
 
-                <div id="ohoh">
-                    <form id="get-data-form" method="POST">
-                        <textarea class="tinymce" id="texteditor"></textarea>
-                        <input type="submit" value="getData">
+                <div id="wiziwig" class="row">
+                    <div class="" style="margin-left: 90px; margin-bottom: 50px;">
+                    <form action="http://localhost/blog/?page=modify_article" id="texte_article_modify" method="POST">
+                        <textarea name="texte" class="tinymce" id="texteditor"></textarea>
+                        <input id="hidden_field" type="text" name="article_id" value="{{ article.id }}" />
+                        <input id="hidden_field" type="text" name="titre" value="ohohooh" />
+                        <button type="submit" id="wiziwig_btn" class="btn btn-primary">Envoyer</button>
                     </form>
+                    </div>
                 </div>
 
             {% endif %}
@@ -108,8 +112,30 @@
 
         <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=218h2ppq5qps0std3k5qz1z6p9lnpisfzwt2z9b2z0kum0ri"></script>
 
+        <script type="text/javascript">
+
+
+        function modify_articleFunction() {
+            tinymce.init({
+                width: "100%",
+                height: "100px",
+                selector: "textarea",
+                plugins: "a11ychecker, advcode, linkchecker, media mediaembed, powerpaste, tinymcespellchecker",
+                toolbar: "a11ycheck, code"
+            });
+
+            $( "#wiziwig").fadeIn(500, 0, function(){
+                $("#wiziwig").css("display", "inline");
+            }); //
+
+        }
+
+        </script>
+
+
 
         <script  type="text/javascript">
+
 
          function delete_commentFunction($id) {
 
@@ -135,7 +161,7 @@
 
 
 
-         function delete_articleFunction($id) {
+         function delete_articleFunction() {
 
              $.ajax({
 
@@ -143,7 +169,7 @@
 
                  type : 'POST',
 
-                 data:"id="+$id,
+                 data:"id="+{{ article.id }},
 
                  success : function(){
                      window.location.replace("http://localhost/blog/?page=home");

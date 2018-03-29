@@ -44,9 +44,7 @@ function article($id = null){
         $manager = new ArticleManager();
         $article = $manager->getArticle($id);
 
-
-        $manage = new CommentaireManager();
-        $commmentaires = $manage->getCommentaires($article);
+        $commmentaires  = $article->getCommentaires();
 
         echo $twig->render('article.twig', array('article' => $article,'commentaires' => $commmentaires));
 
@@ -63,16 +61,19 @@ function post_article() {
     }
 
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['texte'])) {
 
         $manager = new ArticleManager();
+
         $article = new Article($_POST['article'][0]);
+
         $manager->addArticle($article);
-        home();
+
+
+        return home();
     }
 
-    echo $twig->render('AddArticle.twig');
-
+    echo $twig->render('post_article.twig');
 
 }
 
@@ -156,6 +157,28 @@ function delete_comment()
 
 }
 
+function modify_article(){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['texte']) && isset($_POST['titre'])) {
+
+            $titre = $_POST['titre'];
+            $texte = $_POST['texte'];
+            $id = $_POST['article_id'];
+
+            $manager = new ArticleManager();
+            $article = $manager->getArticle($id);
+            $article->setTitre($titre);
+            $article->setTexte($texte);
+
+            $manager->updateArticle($article);
+            return article($id);
+        }
+    }
+
+
+}
+
+
 
 function delete_article(){
 
@@ -227,5 +250,6 @@ function admin_disconnect() {
 
 function test() {
     global $twig;
+
     echo $twig->render('test.twig');
 }

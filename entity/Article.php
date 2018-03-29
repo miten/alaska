@@ -13,6 +13,10 @@ class Article  {
 
     private $date;
 
+    private $commentaires;
+
+
+
     /**
      * Article constructor.
      * @param $id
@@ -43,6 +47,7 @@ class Article  {
         $this->setTitre($rows['titre']);
         $this->setTexte($rows['texte']);
         $this->setdate($rows['date']);
+
     }
 
 
@@ -113,6 +118,29 @@ class Article  {
     public function setTexte($texte)
     {
         $this->texte = $texte;
+    }
+
+
+    /**
+     * @return mixed
+     */
+
+    public function getCommentaires()
+    {
+
+        $commentaires = new CommentaireManager();
+        $commentaires = $commentaires->getCommentaires($this);
+        $this->setCommentaires($commentaires);
+        return $commentaires;
+
+    }
+
+    /**
+     * @param mixed $commentaires
+     */
+    public function setCommentaires($commentaires)
+    {
+        $this->commentaires = $commentaires;
     }
 
 

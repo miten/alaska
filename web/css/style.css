@@ -44,19 +44,6 @@ h3 {
 }
 
 
-.navbar {
-    height:50px;
-}
-
-.navbar-nav {
-
-    width:23%;
-}
-
-.nav-item {
-    margin-right: 1%;
-}
-
 
 
 .bg-dark {
@@ -84,7 +71,8 @@ h3 {
  
 .header_articles {
 
-	height: 74px;
+	min-height: 74px;
+    height: auto;
 	width: auto;
 	background-color: #F3F3F3;
     border-bottom: 1px solid #E5E5E5;
@@ -98,16 +86,24 @@ h3 {
 
 .title_header {
     float: left;
+    width: 70%;
+    margin-right: 1%;
 }
+
 
 #modify_icon {
 
     float: right;
     margin-right: 18px;
     margin-top: 15px;
+    cursor: pointer;
 
 }
 
+
+#hidden_field{
+    display: none;
+}
 
 
 #delete_icon {
@@ -177,18 +173,20 @@ h3 {
 .footer_articles {
 
     height: 20px;
+    padding: 25px;
 
 }
 
-.footer_articles p {
 
-margin-right: 10px;
+#icon_footer_articles {
+    margin-left: 5px;
 }
 
 .footer_articles > p {
     float: right;
     color: #4e555b;
     font-size: 12px;
+    margin-right: 10px;
 
 }
 
@@ -295,15 +293,26 @@ margin-right: 10px;
 }
 
 
+#wiziwig {
+    display: none;
+}
+
+#wiziwig_btn {
+    float: right;
+    margin-right: 26px;
+    margin-top: 12px;
+    background-color: #34495E;
+}
+
+
 
 /* Page login  */
 
-.admin_form {
-    width: 30%;
-    margin: 0 auto;
+#admin_form {
+
     margin-top: 6%;
     margin-bottom: 6%;
-    margin-left: 35%;
+    margin-left: 5%;
 }
 
 
@@ -355,12 +364,29 @@ margin-right: 10px;
 
 
 
+@media only screen and (max-width: 766px) {
 
+    .comment_form {
+        width: 100%;
+    }
 
+    .articles {
+        width: 100%;
+    }
 
+    h3 {
+        font-size: 1.3em;
+    }
 
+    .fa-lg {
+        font-size: 1em;
+    }
 
+    .body_articles {
+        padding: 25px 25px;
 
+    }
+}
 
 
 

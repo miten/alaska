@@ -1,0 +1,32 @@
+{% extends "home.twig" %}
+
+{% block content %}
+
+
+    <div id="wiziwig" class="row">
+        <div class="" style="margin-left: 90px; margin-bottom: 50px;">
+            <form action="http://localhost/blog/?page=modify_article" id="texte_article_modify" method="POST">
+                <textarea name="article[0][texte]" class="tinymce" id="texteditor"></textarea>
+                <button type="submit" id="wiziwig_btn" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+    window.onload = function() {
+        tinymce.init({
+            width: "100%",
+            height: "100px",
+            selector: "textarea",
+            plugins: "a11ychecker, advcode, linkchecker, media mediaembed, powerpaste, tinymcespellchecker",
+            toolbar: "a11ycheck, code"
+        });
+    }
+</script>
+
+
+{% endblock %}

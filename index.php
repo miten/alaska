@@ -59,6 +59,12 @@ if (isset($_GET['page'])) {
 
 
 
+
+        case 'modify_article':
+            modify_article();
+            break;
+
+
         case 'delete_article':
             delete_article();
             break;
