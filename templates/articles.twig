@@ -17,7 +17,8 @@
                 </div>
                 <div class="footer_articles">
                     <p>{{ article.date|date("d/m/Y") }}<i  id="icon_footer_articles" class="fas fa-calendar-alt fa-lg"></i></p>
-                    <p id="comment_nmbr"> {{ article.commentaires|length }}<i style="margin-right: 15px;" id="icon_footer_articles" class="fas fa-comments fa-lg"></i></p>
+                    <p id="comment_nmbr"> {{ article.commentaires|length }}<i style="margin-right: 15px;{% if article.signaledCommentaires == true and session.statut == true %}color: #D14B4B;{% endif %}" id="icon_footer_articles" class="fas fa-comments fa-lg"></i></p>
+
                 </div>
             </div>
 

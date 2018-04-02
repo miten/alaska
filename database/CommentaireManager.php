@@ -101,7 +101,13 @@ class CommentaireManager
 
         {
 
-            $commentaires[] = new Commentaire($donnees);
+            $commentaire = new Commentaire($donnees);
+
+            $commentaires[] =  $commentaire;
+
+            if ($commentaire->getSignalement() > 2) {
+                $article->setSignaledCommentaires(true);
+            }
 
         }
 
@@ -109,6 +115,7 @@ class CommentaireManager
         return $commentaires;
 
     }
+
 
 
 

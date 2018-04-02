@@ -7,8 +7,8 @@
             <div id="wiziwig">
                 <div class="" style="margin-left: 90px; margin-bottom: 50px;">
                     <form action="http://localhost/blog/?page=post_article" id="post_article_form" method="POST">
-                        <input maxlength="120" minlength="3" type="text" placeholder="Titre" name="article[0][titre]" id="titre_article_form">
-                        <textarea maxlength="120" minlength="3" type="text" name="article[0][texte]" class="tinymce" id="texteditor"></textarea>
+                        <input maxlength="120" minlength="3" type="text" placeholder="Titre" name="article[0][titre]" id="titre_article_form" required>
+                        <textarea maxlength="120" minlength="3" type="text" name="article[0][texte]" class="tinymce" id="texteditor" required></textarea>
                         <button type="submit" id="wiziwig_btn" class="btn btn-primary">Envoyer</button>
                     </form>
                 </div>

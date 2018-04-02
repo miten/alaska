@@ -15,6 +15,8 @@ class Article  {
 
     private $commentaires;
 
+    private $signaledCommentaires = false;
+
 
 
     /**
@@ -97,12 +99,31 @@ class Article  {
     }
 
     /**
+     * @return mixed
+     */
+    public function getSignaledCommentaires()
+    {
+        return $this->signaledCommentaires;
+    }
+
+    /**
+     * @param mixed $signaledCommentaires
+     */
+    public function setSignaledCommentaires($signaledCommentaires)
+    {
+        $this->signaledCommentaires = $signaledCommentaires;
+    }
+
+
+    /**
+     *
      * @param mixed $titre
      */
     public function setTitre($titre)
     {
         $this->titre = $titre;
     }
+
 
     /**
      * @return mixed
@@ -142,6 +163,9 @@ class Article  {
     {
         $this->commentaires = $commentaires;
     }
+
+
+
 
 
 
