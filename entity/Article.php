@@ -99,6 +99,17 @@ class Article  {
     }
 
     /**
+     *
+     * @param mixed $titre
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+    }
+
+
+
+    /**
      * @return mixed
      */
     public function getSignaledCommentaires()
@@ -115,14 +126,7 @@ class Article  {
     }
 
 
-    /**
-     *
-     * @param mixed $titre
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-    }
+
 
 
     /**

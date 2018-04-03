@@ -8,32 +8,25 @@
  */
 
 require 'entity/Commentaire.php';
+require_once 'database/DataConnect.php';
 
-
-class CommentaireManager
+class CommentaireManager extends DataConnect
 {
-
 
 
     private $_db; // Instance de PDO
 
 
-    public function __construct()
-
-    {
-
-         $db = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->setDb($db);
-
-    }
-
 
     public function advertCommentaire(Commentaire $commentaire){
-        $signalement = (int) $commentaire->getSignalement();
-        $id = (int) $commentaire->getId();
 
-        $q = $this->_db->prepare('UPDATE commentaires SET signalement = '.$signalement.' WHERE id = '.$id);
+        $q = $this->_db->prepare('UPDATE commentaires SET signalement = :signalement WHERE id = :id');
+
+        $q->bindValue(':signalement', $commentaire->getSignalement(), PDO::PARAM_INT);
+
+        $q->bindValue(':id', $commentaire->getId(), PDO::PARAM_INT);
+
+
         $q->execute();
 
     }
@@ -70,10 +63,11 @@ class CommentaireManager
 
     {
 
+        $q = $this->_db->prepare('SELECT * FROM commentaires WHERE id = :id LIMIT 1');
 
-        $id = (int) $id;
+        $q->bindValue(':id', $id, PDO::PARAM_INT);
 
-        $q = $this->_db->query('SELECT * FROM commentaires WHERE id = '.$id);
+        $q->execute();
 
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
@@ -88,9 +82,12 @@ class CommentaireManager
     public function deleteCommentaire(Commentaire $commentaire)
 
     {
-        $id = $commentaire->getId();
 
-        $this->_db->exec('DELETE FROM commentaires WHERE id = '.$id);
+        $q = $this->_db->prepare('DELETE FROM commentaires WHERE id = :id');
+
+        $q->bindValue(':id', $commentaire->getId(), PDO::PARAM_INT);
+
+        $q->execute();
 
     }
 

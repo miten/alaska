@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01674d37-c797-40c2-80bb-eee976c938ef" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/database/AdminManager.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/database/ArticleManager.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/database/CommentaireManager.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller.php" afterPath="$PROJECT_DIR$/controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/ArticleManager.php" afterPath="$PROJECT_DIR$/database/ArticleManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/CommentaireManager.php" afterPath="$PROJECT_DIR$/database/CommentaireManager.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entity/Article.php" afterPath="$PROJECT_DIR$/entity/Article.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/article.twig" afterPath="$PROJECT_DIR$/templates/article.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/post_article.twig" afterPath="$PROJECT_DIR$/templates/post_article.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/style.css" afterPath="$PROJECT_DIR$/web/css/style.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +24,39 @@
     <favorites_list name="blog" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="ArticleManager.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/ArticleManager.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-552">
+              <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding>
+                <marker date="1522781710669" expanded="true" signature="225:295" ph="INSERT INTO articles... " />
+                <marker date="1522781710669" expanded="true" signature="611:658" ph="DELETE FROM " />
+                <marker date="1522781710669" expanded="true" signature="659:694" ph="DELETE FROM " />
+                <marker date="1522781710669" expanded="true" signature="877:914" ph="SELECT * FRO... articles" />
+                <marker date="1522781710669" expanded="true" signature="877:922" ph="SELECT * FRO... articles" />
+                <marker date="1522781710669" expanded="true" signature="1336:1370" ph="SELECT * FRO... articles" />
+                <marker date="1522781710669" expanded="true" signature="1371:1412" ph="SELECT * FRO... articles" />
+                <marker date="1522781710669" expanded="true" signature="1771:1836" ph="UPDATE artic... " />
+                <marker date="1522781710669" expanded="true" signature="2211:2256" ph="SELECT * FRO... commentaires" />
+                <marker date="1522781710669" expanded="true" signature="2211:2278" ph="SELECT * FRO... commentaires" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="controller.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="210" column="5" lean-forward="true" selection-start-line="210" selection-start-column="5" selection-end-line="210" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -39,7 +69,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>margin-rig</find>
       <find>&lt;link href=&quot;web/css/navbar.css&quot; rel=&quot;stylesheet&quot;&gt;</find>
       <find>Dosis</find>
       <find>Pacifico</find>
@@ -69,6 +98,7 @@
       <find>autor-img</find>
       <find>Commentaires</find>
       <find>Commentaire</find>
+      <find>advert</find>
     </findStrings>
     <replaceStrings>
       <replace>$article</replace>
@@ -94,10 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controller/controller.php" />
-        <option value="$PROJECT_DIR$/templates/homep.twig" />
-        <option value="$PROJECT_DIR$/web/Controller/controller.php" />
-        <option value="$PROJECT_DIR$/Controller/controller.php" />
         <option value="$PROJECT_DIR$/entity/post.php" />
         <option value="$PROJECT_DIR$/entity/articles.php" />
         <option value="$PROJECT_DIR$/entity/Database.php" />
@@ -128,7 +154,6 @@
         <option value="$PROJECT_DIR$/templates/Nouveau dossier/article.twig" />
         <option value="$PROJECT_DIR$/templates/admin_connect.twig" />
         <option value="$PROJECT_DIR$/templates/tem/admin_connect.twig" />
-        <option value="$PROJECT_DIR$/database/AdminManager.php" />
         <option value="$PROJECT_DIR$/database/d/AdminManager.php" />
         <option value="$PROJECT_DIR$/templates/homes.twig" />
         <option value="$PROJECT_DIR$/templates/test.twig" />
@@ -140,11 +165,16 @@
         <option value="$PROJECT_DIR$/templates/post_article.twig" />
         <option value="$PROJECT_DIR$/templates/aboutme.twig" />
         <option value="$PROJECT_DIR$/web/css/style.css" />
-        <option value="$PROJECT_DIR$/database/CommentaireManager.php" />
-        <option value="$PROJECT_DIR$/templates/article.twig" />
         <option value="$PROJECT_DIR$/entity/Article.php" />
-        <option value="$PROJECT_DIR$/database/ArticleManager.php" />
         <option value="$PROJECT_DIR$/controller.php" />
+        <option value="$PROJECT_DIR$/database/connect.php" />
+        <option value="$PROJECT_DIR$/database/databaseCon.php" />
+        <option value="$PROJECT_DIR$/database/Dataconnect.php" />
+        <option value="$PROJECT_DIR$/database/DataConnect.php" />
+        <option value="$PROJECT_DIR$/templates/article.twig" />
+        <option value="$PROJECT_DIR$/database/ArticleManager.php" />
+        <option value="$PROJECT_DIR$/database/CommentaireManager.php" />
+        <option value="$PROJECT_DIR$/database/AdminManager.php" />
       </list>
     </option>
   </component>
@@ -189,74 +219,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blog" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -330,21 +292,22 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../fitness" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp\www\blog\templates\web" />
-      <recent name="C:\wamp\www\blog\web\img" />
-      <recent name="C:\wamp\www\blog\templates" />
-      <recent name="C:\wamp\www\blog\web\js" />
-      <recent name="C:\wamp\www\blog\database\d" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp\www\blog\templates" />
       <recent name="C:\wamp\www\blog\admin" />
       <recent name="C:\wamp\www\blog" />
       <recent name="C:\wamp\www\blog\web" />
       <recent name="C:\wamp\www\test" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\blog" />
+      <recent name="C:\wamp\www\blog\templates\web" />
+      <recent name="C:\wamp\www\blog\web\img" />
+      <recent name="C:\wamp\www\blog\templates" />
+      <recent name="C:\wamp\www\blog\web\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -429,11 +392,13 @@
       <workItem from="1522704837097" duration="6734000" />
       <workItem from="1522711833358" duration="3387000" />
       <workItem from="1522753066685" duration="6109000" />
+      <workItem from="1522766214758" duration="2716000" />
+      <workItem from="1522772047644" duration="10709000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="279609000" />
+    <option name="totallyTimeSpent" value="293034000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -446,9 +411,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="1" width="1912" height="1023" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31648353" sideWeight="0.49585798" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32857144" sideWeight="0.49585798" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886723" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886723" sideWeight="0.50652885" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -480,14 +445,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/img/modify.svg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database.php" />
     <entry file="file://$PROJECT_DIR$/model.php" />
     <entry file="file://$PROJECT_DIR$/admin/.htpasswd">
       <provider selected="true" editor-type-id="text-editor">
@@ -628,27 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/articles.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="19" column="20" lean-forward="true" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="268" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="127" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="67" column="28" lean-forward="false" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/post_article.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -656,34 +592,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/AdminManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="18" column="71" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="71" />
-          <folding>
-            <marker date="1522339169105" expanded="true" signature="495:588" ph="SELECT usern... admin" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/CommentaireManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="84" column="4" lean-forward="false" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="4" />
-          <folding>
-            <marker date="1522759066184" expanded="true" signature="620:686" ph="UPDATE comme... " />
-            <marker date="1522759066184" expanded="true" signature="830:959" ph="INSERT INTO commentaires... " />
-            <marker date="1522759066184" expanded="true" signature="1447:1485" ph="SELECT * FRO... commentaires" />
-            <marker date="1522759066184" expanded="true" signature="1768:1804" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/aboutme.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -691,51 +603,117 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="606">
           <caret line="365" column="0" lean-forward="false" selection-start-line="365" selection-start-column="0" selection-end-line="370" selection-end-column="1" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="737">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="127" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/entity/Article.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+        <state relative-caret-position="768">
+          <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller.php">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="43" column="45" lean-forward="false" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
+        <state relative-caret-position="240">
+          <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/connect.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="21" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/articles.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/DataConnect.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/article.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="80" column="64" lean-forward="false" selection-start-line="80" selection-start-column="64" selection-end-line="80" selection-end-column="64" />
+        <state relative-caret-position="672">
+          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/CommentaireManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="89" column="22" lean-forward="false" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="22" />
+          <folding>
+            <marker date="1522782574837" expanded="true" signature="356:418" ph="UPDATE comme... " />
+            <marker date="1522782574837" expanded="true" signature="356:421" ph="UPDATE comme... " />
+            <marker date="1522782574837" expanded="true" signature="356:423" ph="UPDATE comme... " />
+            <marker date="1522782574837" expanded="true" signature="721:850" ph="INSERT INTO commentaires... " />
+            <marker date="1522782574837" expanded="true" signature="1313:1362" ph="SELECT * FRO... commentaires" />
+            <marker date="1522782574837" expanded="true" signature="1688:1727" ph="DELETE FROM " />
+            <marker date="1522782574837" expanded="true" signature="1688:1902" ph="DELETE FROM " />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/ArticleManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1183">
-          <caret line="71" column="40" lean-forward="false" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+        <state relative-caret-position="-552">
+          <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
-            <marker date="1522761875208" expanded="true" signature="384:454" ph="INSERT INTO articles... " />
-            <marker date="1522761875208" expanded="true" signature="796:840" ph="DELETE FROM " />
-            <marker date="1522761875208" expanded="true" signature="875:907" ph="DELETE FROM " />
-            <marker date="1522761875208" expanded="true" signature="1027:1061" ph="SELECT * FRO... articles" />
-            <marker date="1522761875208" expanded="true" signature="1027:1066" ph="SELECT * FRO... articles" />
-            <marker date="1522761875208" expanded="true" signature="1027:1076" ph="SELECT * FRO... articles" />
-            <marker date="1522761875208" expanded="true" signature="1027:1078" ph="SELECT * FRO... articles" />
-            <marker date="1522761875208" expanded="true" signature="1447:1469" ph="SELECT * FRO... articles" />
-            <marker date="1522761875208" expanded="true" signature="1447:1488" ph="SELECT * FRO... articles" />
-            <marker date="1522761875208" expanded="true" signature="1824:1889" ph="UPDATE artic... " />
-            <marker date="1522761875208" expanded="true" signature="2295:2366" ph="SELECT * FRO... commentaires" />
+            <marker date="1522781710669" expanded="true" signature="225:295" ph="INSERT INTO articles... " />
+            <marker date="1522781710669" expanded="true" signature="611:658" ph="DELETE FROM " />
+            <marker date="1522781710669" expanded="true" signature="659:694" ph="DELETE FROM " />
+            <marker date="1522781710669" expanded="true" signature="877:914" ph="SELECT * FRO... articles" />
+            <marker date="1522781710669" expanded="true" signature="877:922" ph="SELECT * FRO... articles" />
+            <marker date="1522781710669" expanded="true" signature="1336:1370" ph="SELECT * FRO... articles" />
+            <marker date="1522781710669" expanded="true" signature="1371:1412" ph="SELECT * FRO... articles" />
+            <marker date="1522781710669" expanded="true" signature="1771:1836" ph="UPDATE artic... " />
+            <marker date="1522781710669" expanded="true" signature="2211:2256" ph="SELECT * FRO... commentaires" />
+            <marker date="1522781710669" expanded="true" signature="2211:2278" ph="SELECT * FRO... commentaires" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/AdminManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="21" />
+          <folding>
+            <marker date="1522782731539" expanded="true" signature="343:369" ph="SELECT FROM commentaires... " />
+            <marker date="1522782731539" expanded="true" signature="343:394" ph="SELECT usern... admin" />
+            <marker date="1522782731539" expanded="true" signature="343:423" ph="SELECT usern... admin" />
+            <marker date="1522782731539" expanded="true" signature="349:369" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="210" column="5" lean-forward="true" selection-start-line="210" selection-start-column="5" selection-end-line="210" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

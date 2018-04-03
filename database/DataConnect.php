@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: Thomas
+ * Date: 03/04/2018
+ * Time: 19:48
+ */
+class DataConnect
+{
+
+
+    public function __construct()
+
+    {
+
+        $db = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->setDb($db);
+
+    }
+
+
+
+}

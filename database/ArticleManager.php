@@ -1,23 +1,13 @@
 <?php
 
+require_once 'database/DataConnect.php';
 
-
-class ArticleManager
+class ArticleManager extends DataConnect
 
 {
 
     private $_db; // Instance de PDO
 
-
-    public function __construct()
-
-    {
-
-         $db = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->setDb($db);
-
-    }
 
 
     public function addArticle(Article $article)
@@ -43,11 +33,12 @@ class ArticleManager
 
     {
 
-        $id = $article->getId();
+        $q = $this->_db->prepare('DELETE FROM commentaires WHERE id_article = :id;DELETE FROM articles WHERE id = :id ');
 
-        $this->_db->exec('DELETE FROM commentaires WHERE id_article = '.$id);
 
-        $this->_db->exec('DELETE FROM articles WHERE id = '.$id);
+        $q->bindValue(':id', $article->getId(), PDO::PARAM_INT);
+
+        $q->execute();
 
     }
 
@@ -56,10 +47,11 @@ class ArticleManager
 
     {
 
-        $id = (int) $id;
+        $q = $this->_db->prepare('SELECT * FROM articles WHERE id = :id LIMIT 1');
 
+        $q->bindValue(':id', $id, PDO::PARAM_INT);
 
-        $q = $this->_db->query('SELECT * FROM articles WHERE id = '.$id.' LIMIT 1');
+        $q->execute();
 
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
@@ -82,8 +74,9 @@ class ArticleManager
 
         $articles = [];
 
-        $q = $this->_db->query('SELECT * FROM articles ORDER BY DATE DESC');
+        $q = $this->_db->prepare('SELECT * FROM articles ORDER BY DATE DESC');
 
+        $q->execute();
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
 
@@ -107,9 +100,9 @@ class ArticleManager
 
         $q->bindValue(':id', $article->getId(), PDO::PARAM_INT);
 
-        $q->bindValue(':titre', $article->getTitre(), PDO::PARAM_INT);
+        $q->bindValue(':titre', $article->getTitre(), PDO::PARAM_STR);
 
-        $q->bindValue(':texte', $article->getTexte(), PDO::PARAM_INT);
+        $q->bindValue(':texte', $article->getTexte(), PDO::PARAM_STR);
 
 
         $q->execute();
@@ -124,9 +117,12 @@ class ArticleManager
 
         $commentaires = [];
 
-        $id = $article->getId();
 
-        $q = $this->_db->query('SELECT * FROM commentaires WHERE id_article = '.$id.' ORDER BY date ASC') ;
+        $q = $this->_db->prepare('SELECT * FROM commentaires WHERE id_article = :id ORDER BY date ASC');
+
+        $q->bindValue(':id', $article->getId(), PDO::PARAM_INT);
+
+        $q->execute();
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
 
