@@ -43,7 +43,11 @@ class ArticleManager
 
     {
 
-        $this->_db->exec('DELETE FROM articles WHERE id = '.$article->getId());
+        $id = $article->getId();
+
+        $this->_db->exec('DELETE FROM commentaires WHERE id_article = '.$id);
+
+        $this->_db->exec('DELETE FROM articles WHERE id = '.$id);
 
     }
 
@@ -55,7 +59,7 @@ class ArticleManager
         $id = (int) $id;
 
 
-        $q = $this->_db->query('SELECT * FROM articles WHERE id = '.$id.' ORDER BY date DESC');
+        $q = $this->_db->query('SELECT * FROM articles WHERE id = '.$id.' LIMIT 1');
 
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
@@ -65,7 +69,7 @@ class ArticleManager
 
         else {
             $article = new Article($donnees);
-
+            $article->setCommentaires();
             return $article;
         }
 
@@ -78,14 +82,15 @@ class ArticleManager
 
         $articles = [];
 
-        $q = $this->_db->query('SELECT * FROM articles');
+        $q = $this->_db->query('SELECT * FROM articles ORDER BY DATE DESC');
 
 
         while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
 
         {
-
-            $articles[] = new Article($donnees);
+            $article = new Article($donnees);
+            $article->setCommentaires();
+            $articles[] = $article;
 
         }
 
@@ -110,6 +115,38 @@ class ArticleManager
         $q->execute();
 
     }
+
+
+
+    public function setCommentaires(Article $article)
+
+    {
+
+        $commentaires = [];
+
+        $id = $article->getId();
+
+        $q = $this->_db->query('SELECT * FROM commentaires WHERE id_article = '.$id.' ORDER BY date ASC') ;
+
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+
+        {
+
+            $commentaire = new Commentaire($donnees);
+
+            $commentaires[] =  $commentaire;
+
+            if ($commentaire->getSignalement() > 2) {
+                $article->setSignaledCommentaires(true);
+            }
+
+        }
+
+        return $commentaires;
+
+    }
+
+
 
 
     public function setDb(PDO $db)

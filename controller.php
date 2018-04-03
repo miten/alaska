@@ -43,14 +43,14 @@ function article($id = null){
         $manager = new ArticleManager();
         $article = $manager->getArticle($id);
 
+
         if (empty($article)) {
             echo $twig->render('error.twig', array('error' => 'Article introuvable'));
         }
 
         else {
 
-            $commmentaires = $article->getCommentaires();
-            echo $twig->render('article.twig', array('article' => $article, 'commentaires' => $commmentaires));
+            echo $twig->render('article.twig', array('article' => $article));
 
         }
 
@@ -67,7 +67,9 @@ function post_article() {
         $twig->addGlobal("session", $_SESSION);
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['statut'] === true) {
 
 
         if (isset($_POST['article'][0]['texte']) && isset($_POST['article'][0]['titre'])) {
@@ -85,7 +87,15 @@ function post_article() {
         }
     }
 
-    echo $twig->render('post_article.twig');
+    if (isset($_SESSION['statut']) && $_SESSION['statut'] === true) {
+
+        echo $twig->render('post_article.twig');
+    }
+
+    else {
+        echo $twig->render('error.twig', array('error' => 'Seul l\'administrateur peut accèder a cette page'));
+    }
+
 
 }
 
@@ -161,7 +171,7 @@ function myself(){
 function delete_comment()
 {
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['statut'] === true) {
 
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
@@ -183,7 +193,7 @@ function delete_comment()
 }
 
 function modify_article(){
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['statut'] === true) {
         if (isset($_POST['article'][0]['texte']) && isset($_POST['article'][0]['titre']) && isset($_POST['article'][0]['article_id'])) {
 
             $id = $_POST['article'][0]['article_id'];
@@ -213,14 +223,12 @@ function modify_article(){
 function delete_article(){
     global $twig;
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['statut'] === true) {
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
             $manager = new ArticleManager();
             $article = $manager->getArticle($id);
 
-            $managers = new CommentaireManager();
-            $managers->deleteArticleCommentaires($article);
             $manager->deleteArticle($article);
 
 
@@ -282,7 +290,7 @@ function admin_connect() {
 
 function admin_disconnect() {
 
-    session_unset();
+    unset($_SESSION['statut']);
     home();
 
 }

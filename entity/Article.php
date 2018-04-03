@@ -142,27 +142,27 @@ class Article  {
     }
 
 
+
     /**
      * @return mixed
      */
-
     public function getCommentaires()
     {
-
-        $commentaires = new CommentaireManager();
-        $commentaires = $commentaires->getCommentaires($this);
-        $this->setCommentaires($commentaires);
-        return $commentaires;
+        return $this->commentaires;
 
     }
 
     /**
      * @param mixed $commentaires
      */
-    public function setCommentaires($commentaires)
+    public function setCommentaires()
     {
+        $manager = new ArticleManager();
+        $commentaires = $manager->setCommentaires($this);
         $this->commentaires = $commentaires;
     }
+
+
 
 
 

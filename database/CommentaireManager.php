@@ -85,52 +85,6 @@ class CommentaireManager
 
 
 
-
-
-    public function getCommentaires(Article $article)
-
-    {
-
-        $commentaires = [];
-
-        $id = $article->getId();
-
-        $q = $this->_db->query('SELECT * FROM commentaires WHERE id_article = '.$id.' ORDER BY date ASC') ;
-
-        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-
-        {
-
-            $commentaire = new Commentaire($donnees);
-
-            $commentaires[] =  $commentaire;
-
-            if ($commentaire->getSignalement() > 2) {
-                $article->setSignaledCommentaires(true);
-            }
-
-        }
-
-
-        return $commentaires;
-
-    }
-
-
-
-
-
-    public function deleteArticleCommentaires(Article $article)
-
-    {
-        $id = $article->getId();
-
-        $this->_db->exec('DELETE FROM commentaires WHERE id_article = '.$id);
-
-    }
-
-
-
     public function deleteCommentaire(Commentaire $commentaire)
 
     {
@@ -139,9 +93,6 @@ class CommentaireManager
         $this->_db->exec('DELETE FROM commentaires WHERE id = '.$id);
 
     }
-
-
-
 
 
 
