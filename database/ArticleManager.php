@@ -2,6 +2,7 @@
 
 require_once 'database/DataConnect.php';
 
+
 class ArticleManager extends DataConnect
 
 {
@@ -72,9 +73,17 @@ class ArticleManager extends DataConnect
 
     {
 
+        $manager = new ArticleManager();
+        $order = $manager->getOrder();
+
         $articles = [];
 
-        $q = $this->_db->prepare('SELECT * FROM articles ORDER BY DATE DESC');
+        if ($order === 'DESC') {
+            $q = $this->_db->prepare("SELECT * FROM articles ORDER BY DATE DESC");
+        }
+        else if ($order === 'ASC') {
+            $q = $this->_db->prepare("SELECT * FROM articles ORDER BY DATE ASC");
+        }
 
         $q->execute();
 
@@ -87,7 +96,9 @@ class ArticleManager extends DataConnect
 
         }
 
+
         return $articles;
+
 
     }
 
@@ -140,6 +151,41 @@ class ArticleManager extends DataConnect
 
         return $commentaires;
 
+    }
+
+
+    function orderArticle() {
+
+        $manager = new ArticleManager();
+        $order = $manager->getOrder();
+
+        $q = $this->_db->prepare("UPDATE admin SET ordered = :order WHERE username = 'admin'");
+
+        if($order === 'DESC') {
+            $q->bindValue(':order', 'ASC', PDO::PARAM_STR);
+
+        }
+        else {
+            $q->bindValue(':order', 'DESC', PDO::PARAM_STR);
+
+        }
+
+        $q->execute();
+
+    }
+
+
+
+
+    public function getOrder() {
+
+        $q = $this->_db->prepare("SELECT ordered FROM admin WHERE username = 'admin'");
+
+        $q->execute();
+
+        $order = $q->fetch();
+
+        return($order[0]);
     }
 
 

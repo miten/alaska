@@ -15,10 +15,13 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Concert+One|Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
     <link href="web/css/style.css" rel="stylesheet">
     <link href="web/css/comment_style.css" rel="stylesheet">
     <link href="web/css/navbar.css" rel="stylesheet">
+
+
 
 </head>
 
@@ -28,16 +31,16 @@
 
 <nav>
     <ul>
-        <li><a href="http://localhost/blog/?page=home"><p><i class="fas fa-home fa-lg"></i>&nbsp; Home</p></a></li>
-        <li><a href="http://localhost/blog/?page=myself"><p>Qui suis-je ?</p></a></li>
+        <li><a href="?page=home"><p><i class="fas fa-home fa-lg"></i>&nbsp; Home</p></a></li>
+        <li><a href="?page=myself"><p>Qui suis-je ?</p></a></li>
 
 
         <li style="float: right;">
-            {% if session.statut == false %} <a class="nav-link" href="http://localhost/blog/?page=admin_connect"><i style="margin-top: -15px;" title="Connexion" class="fas fa-sign-in-alt fa-2x" aria-hidden="true"></i></a>{% endif %}
-            {% if session.statut == true %}<a class="nav-link" href="http://localhost/blog/?page=admin_disconnect"><i style="margin-top: -15px;" title="Deconnexion" class="fas fa-sign-out-alt fa-2x" aria-hidden="true"></i></a>{% endif %}
+            {% if session.statut == false %} <a class="nav-link" href="?page=admin_connect"><i style="margin-top: -15px;" title="Connexion" class="fas fa-sign-in-alt fa-2x" aria-hidden="true"></i></a>{% endif %}
+            {% if session.statut == true %}<a class="nav-link" href="?page=admin_disconnect"><i style="margin-top: -15px;" title="Deconnexion" class="fas fa-sign-out-alt fa-2x" aria-hidden="true"></i></a>{% endif %}
         </li>
         {% if session.statut == true %}
-            <li style="float: right;"><a href="http://localhost/blog/?page=post_article"><p><i class="fas fa-plus-circle fa-lg"></i>&nbsp;Poster article</p></a></li>
+            <li style="float: right;"><a href="?page=post_article"><p><i class="fas fa-plus-circle fa-lg"></i>&nbsp;Poster article</p></a></li>
         {% endif %}
         <li>
             <a href="#">
@@ -62,8 +65,10 @@
 <!-- Footer -->
 <footer>
     <div class="container">
-        <p class="copyright">Copyright &copy; Jean Forteroche 2018</p>
+        <p class="copyright">Copyright &copy; Jean Forteroche 2018 &nbsp; &nbsp;{% if session.statut == true %}<a class="" href="?page=order_articles"><i title="Ordre articles" style="cursor: pointer; color: black" class="fas fa-arrows-alt-v"></i></a>{% endif %}</p>
+
     </div>
+
 </footer>
 
 

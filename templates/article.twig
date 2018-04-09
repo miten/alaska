@@ -6,7 +6,7 @@
         <div class="container">
             <div class="articles">
                 <div class="header_articles">
-                    <h3 class="title_header">{{ article.titre | raw }}</h3>
+                    <h3 class="title_header_1">{{ article.titre | raw }}</h3>
                     {% if session.statut == true %}
                         <i onclick="delete_articleFunction()" id="delete_icon" title="Supprimer" class="far fa-trash-alt fa-lg" aria-hidden="true"></i>
                         <i onclick="modify_articleFunction()" id="modify_icon" title="Editer" class="fas fa-pencil-alt fa-lg" aria-hidden="true"></i>
@@ -26,10 +26,7 @@
 
             <div class="comment_form">
                 <h3 style="color: #34495E; margin-bottom: 30px;">Poster un commentaire</h3>
-                <form action="http://localhost/blog/?page=post_comment" method="POST">
-                    <div class="form-group" id="error_message">
-                        <p>{{ error_message }} {% if error_message != null %} <i title="Erreur" id="signalement_icon_active" class="fas fa-exclamation-circle fa-lg"></i> {% endif %} </p>
-                    </div>
+                <form action="?page=post_comment" method="POST">
                     <div class="form-group row">
                         <label class="col-10">Auteur</label>
                         <div class="col-sm-6 col-xs-12">
@@ -39,7 +36,7 @@
                     <div class="form-group row">
                         <label class="col-12">Message</label>
                         <div class="col-sm-10 col-xs-12">
-                            <textarea maxlength="200" minlength="5" type="text" name="commentaire[0][texte]" class="form-control" id="exampleInputPassword1" placeholder=""> </textarea>
+                            <textarea maxlength="200" minlength="5" type="text" name="commentaire[0][texte]" class="form-control" id="exampleInputPassword1" placeholder="" required></textarea>
                         </div>
                     </div>
                     <input style="display: none;" type="number" name="commentaire[0][id_article]" value="{{ article.id }}">
@@ -54,9 +51,9 @@
 
             <div id="wiziwig" style="display: none;">
 
-                <form action="http://localhost/blog/?page=modify_article" id="texte_article_modify" method="POST">
+                <form action="?page=modify_article" id="texte_article_modify" method="POST">
                     <input maxlength="120" minlength="3" type="text" placeholder="Titre" name="article[0][titre]" id="titre_article_form" value="{{ article.titre | raw  }}" required>
-                    <textarea name="article[0][texte]" class="tinymce" id="texteditor" required>{{ article.texte | raw  }} </textarea>
+                    <textarea name="article[0][texte]" class="tinymce" id="texteditor" required>{{ article.texte | raw  }}</textarea>
                     <input name="article[0][article_id]" id="hidden_field" type="text" value="{{ article.id }}" />
                     <button type="submit" id="wiziwig_btn" class="btn btn-primary">Envoyer</button>
                 </form>
@@ -143,7 +140,7 @@
 
                 $.ajax({
 
-                    url : 'http://localhost/blog/?page=delete_comment',
+                    url : '?page=delete_comment',
 
                     type : 'POST',
 
@@ -166,14 +163,14 @@
 
                 $.ajax({
 
-                    url : 'http://localhost/blog/?page=delete_article',
+                    url : '?page=delete_article',
 
                     type : 'POST',
 
                     data:"id="+{{ article.id }},
 
                     success : function(){
-                        window.location.replace("http://localhost/blog/?page=home");
+                        window.location.replace("?page=home");
 
 
                     }
@@ -193,7 +190,7 @@
 
                 $.ajax({
 
-                    url : 'http://localhost/blog/?page=advert_comment',
+                    url : '?page=advert_comment',
 
                     type : 'POST',
 

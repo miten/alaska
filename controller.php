@@ -19,7 +19,34 @@ function home(){
     $manager = new ArticleManager();
     $articles = $manager->getArticles();
 
-    echo $twig->render('articles.twig', array('articles' => $articles));
+
+
+    $limit = 4;
+    $pagination = ceil((count($articles)) / $limit);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['index'])) {
+
+        if ($_GET['index'] > $pagination || $_GET['index'] < 1) {
+            echo $twig->render('error.twig', array('error' => 'Action impossible'));
+            die();
+        }
+
+        else {
+            $page = $_GET['index'];
+        }
+
+    }
+
+    else {
+        $page = 1;
+    }
+
+
+    $start = ($page * $limit) - $limit;
+    $articles = array_slice($articles, $start, $limit);
+
+
+    echo $twig->render('articles.twig', array('articles' => $articles, 'pagination' => $pagination, 'page' => $page));
 }
 
 
@@ -292,5 +319,29 @@ function admin_disconnect() {
 
     unset($_SESSION['statut']);
     home();
+
+}
+
+
+
+function order_articles() {
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_SESSION['statut'] === true) {
+        $manager = new ArticleManager();
+        $manager->orderArticle();
+        home();
+
+    }
+
+    else {
+        global $twig;
+        echo $twig->render('error.twig', array('error' => 'Action impossible'));
+
+
+    }
+
+
+
+
 
 }

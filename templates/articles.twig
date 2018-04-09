@@ -4,14 +4,15 @@
 <!-- Page Content -->
 <section class="content">
     <div class="container">
-        <h2>Voici mon histoire ...</h2>
 
         {% for article in articles %}
 
             <div class="articles">
+                <a href="?page=article&id={{ article.id }}">
                 <div class="header_articles">
-                    <a href="http://localhost/blog/?page=article&id={{ article.id }}"><h3 style="width: 90%;" class="title_header">{{ article.titre | raw }}</h3></a>
+                    <h3 class="title_header">{{ article.titre | raw }}</h3>
                 </div>
+                </a>
                 <div class="body_articles">
                     <p>{{ article.texte  | slice(0, 500) | raw  }} ... <p>
                 </div>
@@ -23,8 +24,20 @@
             </div>
 
         {% endfor %}
+        <div class="pagination_container">
+            <div class="pagination">
+                {% for i in 1..pagination %}
+                    <a class="{% if page == i %}selected{% endif %}" href="?page=home&index={{ i }}">{{ i }}</a>
+                {% endfor %}
+            </div>
+        </div>
 
     </div>
 </section>
+
+{% endblock %}
+
+
+{% block script %}
 
 {% endblock %}

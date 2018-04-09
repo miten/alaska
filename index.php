@@ -75,6 +75,11 @@ if (isset($_GET['page'])) {
             break;
 
 
+        case 'order_articles':
+            order_articles();
+            break;
+
+
         default:
             echo $twig->render('error.twig', array('error' => 'Perdu ?'));
             break;
