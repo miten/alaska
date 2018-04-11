@@ -10,6 +10,10 @@ class DataConnect
 {
 
 
+    protected $_db; // Instance de PDO
+
+
+
     public function __construct()
 
     {
@@ -20,6 +24,15 @@ class DataConnect
 
     }
 
+
+
+    protected function setDb(PDO $db)
+
+    {
+
+        $this->_db = $db;
+
+    }
 
 
 }

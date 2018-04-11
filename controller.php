@@ -5,6 +5,7 @@ require 'entity/Article.php';
 require 'database/ArticleManager.php';
 require 'database/CommentaireManager.php';
 require 'database/AdminManager.php';
+require 'vendor/Pagination/Pagination.php';
 
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
 $twig= new Twig_Environment($loader, ['cache' => false]);
@@ -16,37 +17,34 @@ function home(){
     if (isset($_SESSION)) {
         $twig->addGlobal("session", $_SESSION);
     }
+
     $manager = new ArticleManager();
     $articles = $manager->getArticles();
 
-
-
-    $limit = 4;
-    $pagination = ceil((count($articles)) / $limit);
+    $pagination = new Pagination($articles, 4, 1);
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['index'])) {
 
-        if ($_GET['index'] > $pagination || $_GET['index'] < 1) {
-            echo $twig->render('error.twig', array('error' => 'Action impossible'));
-            die();
+        $page = (int) $_GET['index'];
+
+        if ($page <= $pagination->getPages() AND $page > 0 ) {
+
+            $pagination->setIndex((int)$_GET['index']);
+            $pagination->setStart();
         }
 
         else {
-            $page = $_GET['index'];
+            error('Page introuvable');
+            die();
         }
 
     }
 
-    else {
-        $page = 1;
-    }
+    $articles = (array_slice($articles, $pagination->getStart(), $pagination->getLimit()));
 
 
-    $start = ($page * $limit) - $limit;
-    $articles = array_slice($articles, $start, $limit);
+    echo $twig->render('articles.twig', array('articles' => $articles, 'pagination' => $pagination));
 
-
-    echo $twig->render('articles.twig', array('articles' => $articles, 'pagination' => $pagination, 'page' => $page));
 }
 
 
@@ -70,19 +68,18 @@ function article($id = null){
         $manager = new ArticleManager();
         $article = $manager->getArticle($id);
 
-
-        if (empty($article)) {
-            echo $twig->render('error.twig', array('error' => 'Article introuvable'));
-        }
-
-        else {
+        if (!empty($article)) {
 
             echo $twig->render('article.twig', array('article' => $article));
 
         }
 
-    }
+        else {
 
+            error('Article introuvable');
+        }
+
+    }
 
 }
 
@@ -90,137 +87,38 @@ function article($id = null){
 
 function post_article() {
     global $twig;
-    if (isset($_SESSION)) {
-        $twig->addGlobal("session", $_SESSION);
-    }
+    $twig->addGlobal("session", $_SESSION);
 
 
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['statut'] === true) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         if (isset($_POST['article'][0]['texte']) && isset($_POST['article'][0]['titre'])) {
 
             $article = $_POST['article'][0];
-
-            $manager = new ArticleManager();
             $article = new Article($article);
+            $manager = new ArticleManager();
+            var_dump($article);
             $manager->addArticle($article);
-            return home();
-        }
-
-        else  {
-            echo $twig->render('error.twig', array('error' => 'Action impossible'));
-        }
-    }
-
-    if (isset($_SESSION['statut']) && $_SESSION['statut'] === true) {
-
-        echo $twig->render('post_article.twig');
-    }
-
-    else {
-        echo $twig->render('error.twig', array('error' => 'Seul l\'administrateur peut accèder a cette page'));
-    }
-
-
-}
-
-
-
-
-function post_comment() {
-
-    global $twig;
-    if (isset($_SESSION)) {
-        $twig->addGlobal("session", $_SESSION);
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        switch(true) {
-
-            case ($_POST['commentaire'][0]['auteur'] == null  ||  $_POST['commentaire'][0]['texte']  == null ):
-                article($_POST['commentaire'][0]['id_article']);
-                break;
-
-            case ($_POST['commentaire'][0]['auteur'] != null  &&  $_POST['commentaire'][0]['texte']  != null ):
-                $manager = new CommentaireManager();
-                $commentaire = new Commentaire($_POST['commentaire'][0]);
-                $manager->addCommentaire($commentaire);
-                article($commentaire->getIdArticle());
-                break;
-        }
-
-    }
-
-}
-
-
-function advert_comment() {
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        if (isset($_POST['id'])) {
-            $id = $_POST['id'];
-
-
-            $managers = new CommentaireManager();
-            $commentaire = $managers->getCommentaire($id);
-            $commentaire->setSignalement($commentaire->getSignalement()+ 1);
-            $managers->advertCommentaire($commentaire);
-
-        }
-
-        else {
-
-            global $twig;
-            echo $twig->render('error.twig', array('error' => 'Action impossible'));
-
-        }
-
-    }
-
-}
-
-
-function myself(){
-    global $twig;
-    if (isset($_SESSION)) {
-        $twig->addGlobal("session", $_SESSION);
-    }
-
-    echo $twig->render('aboutme.twig');
-}
-
-
-
-function delete_comment()
-{
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['statut'] === true) {
-
-        if (isset($_POST['id'])) {
-            $id = $_POST['id'];
-            $managers = new CommentaireManager();
-            $commentaire = $managers->getCommentaire($id);
-            $managers->deleteCommentaire($commentaire);
+            home();
             die();
         }
 
+        else  {
+            error('Action impossible');
+        }
     }
 
-    else {
-        global $twig;
-        echo $twig->render('error.twig', array('error' => 'Action impossible'));
-    }
 
-
+    echo $twig->render('post_article.twig');
 
 }
 
+
+
+
 function modify_article(){
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['statut'] === true) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['article'][0]['texte']) && isset($_POST['article'][0]['titre']) && isset($_POST['article'][0]['article_id'])) {
 
             $id = $_POST['article'][0]['article_id'];
@@ -233,46 +131,130 @@ function modify_article(){
             $article->setTexte($texte);
 
             $manager->updateArticle($article);
-            return article($id);
+            article($id);
         }
     }
 
     else {
-        global $twig;
-        echo $twig->render('error.twig', array('error' => 'Action impossible'));
+        error('Action impossible');
     }
 
 
 }
 
 
+function delete_article() {
 
-function delete_article(){
-    global $twig;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+        $id = $_POST['id'];
+        $manager = new ArticleManager();
+        $article = $manager->getArticle($id);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['statut'] === true) {
-        if (isset($_POST['id'])) {
-            $id = $_POST['id'];
-            $manager = new ArticleManager();
-            $article = $manager->getArticle($id);
-
+        if (!empty($article)) {
             $manager->deleteArticle($article);
-
-
         }
 
         else {
 
-            echo $twig->render('error.twig', array('error' => 'Action impossible'));
-
+            error('Action impossible');
 
         }
     }
+}
 
-    else {
 
-        echo $twig->render('error.twig', array('error' => 'Action impossible'));
+
+function post_comment() {
+
+    global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+        if ($_POST['commentaire'][0]['auteur'] != null  AND  $_POST['commentaire'][0]['texte']  != null ) {
+
+            $manager = new CommentaireManager();
+            $commentaire = new Commentaire($_POST['commentaire'][0]);
+            $manager->addCommentaire($commentaire);
+            article($commentaire->getIdArticle());
+        }
+
+        else {
+
+           article($_POST['commentaire'][0]['id_article']);
+
+        }
+
+    }
+}
+
+
+function advert_comment() {
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+
+            $id = $_POST['id'];
+            $managers = new CommentaireManager();
+            $commentaire = $managers->getCommentaire($id);
+
+            if (!empty($commentaire)) {
+
+                $commentaire->setSignalement($commentaire->getSignalement()+ 1);
+                $managers->advertCommentaire($commentaire);
+            }
+
+            else {
+
+                error('Action impossible');
+            }
+
+
+
+    }
+
+}
+
+
+
+
+function delete_comment() {
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+
+            $id = $_POST['id'];
+            $managers = new CommentaireManager();
+            $commentaire = $managers->getCommentaire($id);
+
+            if (!empty($commentaire)) {
+
+                $managers->deleteCommentaire($commentaire);
+                article($id);
+            }
+
+            else {
+
+                error('Action impossible');
+
+            }
+    }
+
+}
+
+
+
+
+
+function myself() {
+
+    global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
+    }
+
+    echo $twig->render('aboutme.twig');
 }
 
 
@@ -286,25 +268,20 @@ function admin_connect() {
         $password = stripslashes($_POST['password']);
 
         $manager = new AdminManager();
-        $result = $manager->adminLogin($username, $password);
+        $login = $manager->adminLogin($username, $password);
 
 
-        switch(true) {
+        if ($login === true) {
 
-            case ($result):
-                $_SESSION['statut'] = true;
-                $twig->addGlobal("session", $_SESSION);
-                home();
-                break;
-
-            case ($username == null  ||  $password == null ):
-                echo $twig->render('admin_connect.twig', array('error_message' => 'Champs manquant'));
-                break;
-
-            case ($result == false):
-                echo $twig->render('admin_connect.twig', array('error_message' => 'Identifiants incorrects'));
-                break;
+            $_SESSION['statut'] = true;
+            $twig->addGlobal("session", $_SESSION);
+            home();
         }
+
+        else {
+            error('Identifiants incorrects');
+        }
+
     }
 
     else {
@@ -324,23 +301,9 @@ function admin_disconnect() {
 
 
 
-function order_articles() {
-
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_SESSION['statut'] === true) {
-        $manager = new ArticleManager();
-        $manager->orderArticle();
-        home();
-
-    }
-
-    else {
-        global $twig;
-        echo $twig->render('error.twig', array('error' => 'Action impossible'));
-
-
-    }
-
-
+function error($error) {
+    global $twig;
+    echo $twig->render('error.twig', array('error' => $error));
 
 
 

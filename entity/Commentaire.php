@@ -7,50 +7,33 @@
  * Date: 12/03/2018
  * Time: 17:59
  */
+
 class Commentaire
 {
-
-
     private $id;
-
     private $auteur;
-
     private $texte;
-
     private $date;
-
     private $id_article;
-
     private $signalement;
-
-    /**
-     * Commentaire constructor.
-     * @param $id
-     * @param $auteur
-     * @param $texte
-     * @param $date
-     * @param $id_article
-     */
 
 
 
     public function __construct(array $rows)
     {
         if (!isset ($rows['id'])){
-
             $this->auteur = ($rows['auteur']);
             $this->texte = ($rows['texte']);
             $this->setDate(new DateTime);
             $this->id_article = ($rows['id_article']);
             $this->setSignalement(0);
-
         }
 
         else {
             $this->hydrate($rows);
         }
-
     }
+
 
 
     public function hydrate(array $rows) {
@@ -61,6 +44,7 @@ class Commentaire
         $this->setIdArticle($rows['id_article']);
         $this->setSignalement($rows['signalement']);
     }
+
 
 
     /**

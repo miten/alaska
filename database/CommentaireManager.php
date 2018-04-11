@@ -14,9 +14,6 @@ class CommentaireManager extends DataConnect
 {
 
 
-    private $_db; // Instance de PDO
-
-
 
     public function advertCommentaire(Commentaire $commentaire){
 
@@ -40,15 +37,15 @@ class CommentaireManager extends DataConnect
         $q = $this->_db->prepare('INSERT INTO commentaires (auteur, texte, date, id_article, signalement) VALUES(:auteur, :texte, :date, :id_article, :signalement)');
 
 
-        $q->bindValue(':auteur', $commentaire->getAuteur());
+        $q->bindValue(':auteur', $commentaire->getAuteur(), PDO::PARAM_STR);
 
-        $q->bindValue(':texte', $commentaire->getTexte());
+        $q->bindValue(':texte', $commentaire->getTexte(), PDO::PARAM_STR);
 
         $q->bindValue(':date', $commentaire->getDate()->format('Y/m/d'));
 
-        $q->bindValue(':id_article', $commentaire->getIdArticle());
+        $q->bindValue(':id_article', $commentaire->getIdArticle(), PDO::PARAM_INT);
 
-        $q->bindValue(':signalement', $commentaire->getSignalement());
+        $q->bindValue(':signalement', $commentaire->getSignalement(), PDO::PARAM_INT);
 
         $q->execute();
 
@@ -91,15 +88,6 @@ class CommentaireManager extends DataConnect
 
     }
 
-
-
-    public function setDb(PDO $db)
-
-    {
-
-        $this->_db = $db;
-
-    }
 
 
 

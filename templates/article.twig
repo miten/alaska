@@ -75,7 +75,7 @@
                             <!-- Commentaires -->
                             <div class="comment-box">
                                 <div class="comment-head">
-                                    <h6 class="comment-name">{{ commentaire.auteur | convert_encoding('UTF-8', 'ISO-8859-1') | raw }}</h6>
+                                    <h6 class="comment-name">{{ commentaire.auteur |e('html') }}</h6>
                                     <span>{{ commentaire.date|date("d/m/Y") }}</span>
                                     {% if session.statut == true %}
                                         <i onclick="delete_commentFunction({{ commentaire.id }})" title="Supprimer" id="delete_icon_2" class="far fa-trash-alt fa-lg" aria-hidden="true"></i>
@@ -85,7 +85,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="comment-content">
-                                    {{ commentaire.texte }}
+                                    {{ commentaire.texte|e('html') }}
                                 </div>
                             </div>
                         </div>

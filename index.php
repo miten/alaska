@@ -27,8 +27,12 @@ if (isset($_GET['page'])) {
 
 
         case 'post_article':
-
-            post_article();
+            if (isset($_SESSION['statut']) && $_SESSION['statut'] === true) {
+                post_article();
+            }
+            else {
+                error('Seul l\'administrateur peut accèder a cette page');
+            }
             break;
 
 
@@ -60,33 +64,46 @@ if (isset($_GET['page'])) {
 
 
         case 'modify_article':
-            modify_article();
+            if (isset($_SESSION['statut']) && $_SESSION['statut'] === true) {
+                modify_article();
+            }
+            else {
+                error('Seul l\'administrateur peut effectuer cette action');
+            }
             break;
+
 
 
 
         case 'delete_article':
-            delete_article();
+            if (isset($_SESSION['statut']) && $_SESSION['statut'] === true) {
+                delete_article();
+            }
+            else {
+                error('Seul l\'administrateur peut effectuer cette action');
+            }
             break;
+
 
 
         case 'delete_comment':
-            delete_comment();
+
+            if (isset($_SESSION['statut']) && $_SESSION['statut'] === true) {
+                delete_comment();
+            }
+            else {
+                error('Seul l\'administrateur peut effectuer cette action');
+            }
             break;
 
 
-        case 'order_articles':
-            order_articles();
-            break;
 
 
         default:
-            echo $twig->render('error.twig', array('error' => 'Perdu ?'));
+            error('perdu ?');
             break;
 
     }
-
-
 
 }
 

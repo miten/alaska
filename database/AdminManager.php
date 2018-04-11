@@ -15,7 +15,6 @@ class AdminManager extends DataConnect
 
 {
 
-    private $_db; // Instance de PDO
 
 
     public function adminLogin($username, $password){
@@ -33,7 +32,7 @@ class AdminManager extends DataConnect
 
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
 
-        if(empty($donnees) )
+        if(empty($donnees))
         {
            return false;
         }
@@ -45,14 +44,6 @@ class AdminManager extends DataConnect
     }
 
 
-
-    public function setDb(PDO $db)
-
-    {
-
-        $this->_db = $db;
-
-    }
 
 
 }

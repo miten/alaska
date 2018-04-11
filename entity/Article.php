@@ -19,28 +19,19 @@ class Article  {
 
 
 
-    /**
-     * Article constructor.
-     * @param $id
-     * @param $titre
-     * @param $texte
-     */
 
 
     public function __construct(array $rows)
     {
-
         if (!isset ($rows['id'])) {
             $this->titre = ($rows['titre']);
             $this->texte = ($rows['texte']);
             $this->setDate(new DateTime);
         }
-
         else {
             $this->hydrate($rows);
         }
     }
-
 
 
 

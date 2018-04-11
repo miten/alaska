@@ -26,8 +26,8 @@
         {% endfor %}
         <div class="pagination_container">
             <div class="pagination">
-                {% for i in 1..pagination %}
-                    <a class="{% if page == i %}selected{% endif %}" href="?page=home&index={{ i }}">{{ i }}</a>
+                {% for i in 1..pagination.pages %}
+                    <a class="{% if pagination.index == i %}selected{% endif %}" href="?page=home&index={{ i }}">{{ i }}</a>
                 {% endfor %}
             </div>
         </div>
