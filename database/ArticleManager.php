@@ -64,6 +64,7 @@ class ArticleManager extends DataConnect
 
     public function addArticle(Article $article) {
 
+
         $q = $this->_db->prepare('INSERT INTO articles(titre, texte, date) VALUES(:titre, :texte, :date)');
 
         $q->bindValue(':titre', $article->getTitre());
@@ -74,7 +75,11 @@ class ArticleManager extends DataConnect
 
         $q->execute();
 
+        $id = $this->_db->lastInsertId();
+
+        return $id;
     }
+
 
 
 

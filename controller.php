@@ -50,20 +50,11 @@ function home(){
 
 
 
-function article($id = null){
+function article($id){
     global $twig;
     if (isset($_SESSION)) {
         $twig->addGlobal("session", $_SESSION);
     }
-
-
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        $idd = $_GET['id'];
-
-    }
-
-    if (isset($id)||isset($idd)) {
-        $id = $id ?: $idd;
 
         $manager = new ArticleManager();
         $article = $manager->getArticle($id);
@@ -78,8 +69,6 @@ function article($id = null){
 
             error('Article introuvable');
         }
-
-    }
 
 }
 
@@ -98,9 +87,8 @@ function post_article() {
             $article = $_POST['article'][0];
             $article = new Article($article);
             $manager = new ArticleManager();
-            var_dump($article);
-            $manager->addArticle($article);
-            home();
+            $id = $manager->addArticle($article);
+            header('Location:?page=article&id='.+ $id);
             die();
         }
 
@@ -131,7 +119,8 @@ function modify_article(){
             $article->setTexte($texte);
 
             $manager->updateArticle($article);
-            article($id);
+            header('Location:?page=article&id='.+ $id);
+
         }
     }
 
@@ -179,12 +168,12 @@ function post_comment() {
             $manager = new CommentaireManager();
             $commentaire = new Commentaire($_POST['commentaire'][0]);
             $manager->addCommentaire($commentaire);
-            article($commentaire->getIdArticle());
+            header('Location:?page=article&id='.+ $commentaire->getIdArticle());
+
         }
 
         else {
-
-           article($_POST['commentaire'][0]['id_article']);
+            header('Location:?page=article&id='.+ $_POST['commentaire'][0]['id_article']);
 
         }
 
@@ -231,7 +220,7 @@ function delete_comment() {
             if (!empty($commentaire)) {
 
                 $managers->deleteCommentaire($commentaire);
-                article($id);
+
             }
 
             else {
@@ -262,7 +251,7 @@ function myself() {
 function admin_connect() {
     global $twig;
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' AND (!empty($_POST['username'])) AND (!empty($_POST['password']))) {
 
         $username = stripslashes($_POST['username']);
         $password = stripslashes($_POST['password']);
@@ -275,11 +264,11 @@ function admin_connect() {
 
             $_SESSION['statut'] = true;
             $twig->addGlobal("session", $_SESSION);
-            home();
+            header('Location:?page=home');
         }
 
         else {
-            error('Identifiants incorrects');
+            echo $twig->render('admin_connect.twig', array('error_message' => 'Identifiants incorrects'));
         }
 
     }
@@ -295,7 +284,7 @@ function admin_connect() {
 function admin_disconnect() {
 
     unset($_SESSION['statut']);
-    home();
+    header('Location:?page=home');
 
 }
 
@@ -303,6 +292,9 @@ function admin_disconnect() {
 
 function error($error) {
     global $twig;
+    if (isset($_SESSION)) {
+        $twig->addGlobal("session", $_SESSION);
+    }
     echo $twig->render('error.twig', array('error' => $error));
 
 

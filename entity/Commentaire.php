@@ -22,10 +22,10 @@ class Commentaire
     public function __construct(array $rows)
     {
         if (!isset ($rows['id'])){
-            $this->auteur = ($rows['auteur']);
-            $this->texte = ($rows['texte']);
+            $this->setAuteur($rows['auteur']);
+            $this->settexte($rows['texte']);
             $this->setDate(new DateTime);
-            $this->id_article = ($rows['id_article']);
+            $this->setIdArticle($rows['id_article']);
             $this->setSignalement(0);
         }
 

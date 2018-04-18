@@ -24,8 +24,8 @@ class Article  {
     public function __construct(array $rows)
     {
         if (!isset ($rows['id'])) {
-            $this->titre = ($rows['titre']);
-            $this->texte = ($rows['texte']);
+            $this->setTitre($rows['titre']);
+            $this->setTexte($rows['texte']);
             $this->setDate(new DateTime);
         }
         else {
